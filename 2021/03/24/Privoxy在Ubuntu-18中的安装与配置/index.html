@@ -20,28 +20,34 @@
     var CONFIG = {"hostname":"srezone.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="SREZONE">
-<meta property="og:url" content="http://srezone.github.io/index.html">
+  <meta name="description" content="前言使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Privoxy在Ubuntu 18中的安装与配置">
+<meta property="og:url" content="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="SREZONE">
+<meta property="og:description" content="前言使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png">
+<meta property="article:published_time" content="2021-03-24T01:53:41.000Z">
+<meta property="article:modified_time" content="2021-03-24T03:25:13.781Z">
 <meta property="article:author" content="Richard Lee">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png">
 
-<link rel="canonical" href="http://srezone.github.io/">
+<link rel="canonical" href="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>SREZONE</title>
+  <title>Privoxy在Ubuntu 18中的安装与配置 | SREZONE</title>
   
 
 
@@ -154,9 +160,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -172,10 +179,9 @@
       <meta itemprop="name" content="SREZONE">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Privoxy在Ubuntu 18中的安装与配置</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Privoxy在Ubuntu 18中的安装与配置
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -199,7 +205,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
 <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>操作系统：Ubuntu 18.04</p>
 <p>系统APT源列表：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ cat /etc/apt/sources.list</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
@@ -212,259 +218,30 @@
 <p><img src="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png" alt="局域网代理软件v2rayN的转发日志"></p>
 <p>观察日志，可以确认使用了Privoxy的Ubuntu已经成功将Linux终端命令行产生的流量转发给代理服务器处理了。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">在Hexo推送博客期间出现的问题与解决方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-03-17 14:36:22 / 修改时间：14:58:51" itemprop="dateCreated datePublished" datetime="2021-03-17T14:36:22+08:00">2021-03-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">博客运维</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">[master 595037e] Site updated: 2021-03-17 11:54:50</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">fatal: unable to access &#x27;https://github.com/srezone/srezone.github.io.git/&#x27;: Encountered end of file</span><br><span class="line">FATAL &#123; err:</span><br><span class="line">   &#123; Error: Spawn failed</span><br><span class="line">       at ChildProcess.task.on.code (/home/noone/WorkSpace/blog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">       at ChildProcess.emit (events.js:198:13)</span><br><span class="line">       at Process.ChildProcess._handle.onexit (internal/child_process.js:248:12) code: 128 &#125; &#125; &#x27;Something\&#x27;s wrong. Maybe you can find the solution here: %s&#x27; &#x27;\u001b[4mhttps://hexo.io/docs/troubleshooting.html\u001b[24m&#x27;</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
-<h3 id="根因定位"><a href="#根因定位" class="headerlink" title="根因定位"></a>根因定位</h3><p>几经搜索尝试，无果，恰好前段时间收到一封Github的邮件，告知如下：</p>
-<p><img src="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png" alt="Github弃用密码访问博客仓库的通知"></p>
-<p>OK，基本了解报错的根因：Github的问题，而不是我这边仓库不一致导致提交冲突等乱七八糟的原因。</p>
-<p>接下来的思路是，配置Hexo使用密钥认证方式完成Git提交：</p>
-<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source ~]$ ssh-keygen -t rsa -b 4096 -C &quot;noone@open-source.cc&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/noone/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /home/noone/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /home/noone/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Z***1/cn********************u/L*****9 noone@open-source.cc</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|                 |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">[noone@open-source ~]$ cd .ssh/</span><br><span class="line">[noone@open-source .ssh]$ ll</span><br><span class="line">total 12</span><br><span class="line">-rw------- 1 noone noone 3243 Mar 17 13:33 id_rsa</span><br><span class="line">-rw-r--r-- 1 noone noone  746 Mar 17 13:33 id_rsa.pub</span><br><span class="line">-rw-r--r-- 1 noone noone 1049 Mar 15 22:11 known_hosts</span><br></pre></td></tr></table></figure>
-<h4 id="配置Github使用密钥认证"><a href="#配置Github使用密钥认证" class="headerlink" title="配置Github使用密钥认证"></a>配置Github使用密钥认证</h4><p>妥善保存私钥文件（id_rsa），将公钥文件（id_rsa.pub）内容复制，粘贴到Github对应的页面中，完成GitHub端的具体配置：</p>
-<p><img src="https://img.imgdb.cn/item/6051a018524f85ce298e6583.png" alt="Github设置密钥登录的配置界面"></p>
-<p>验证密钥配置是否生效，如果配置成功会返回具体提示，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source .ssh]$ ssh -T git@github.com</span><br><span class="line">The authenticity of host &#x27;github.com (13.250.777.333)&#x27; can&#x27;t be established.</span><br><span class="line">RSA key fingerprint is SHA256:n******************************************.</span><br><span class="line">RSA key fingerprint is MD5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com,13.250.777.333&#x27; (RSA) to the list of known hosts.</span><br><span class="line">Hi srezone! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">[noone@open-source .ssh]$</span><br></pre></td></tr></table></figure>
-<h4 id="配置Hexo使用SSH密钥认证方式"><a href="#配置Hexo使用SSH密钥认证方式" class="headerlink" title="配置Hexo使用SSH密钥认证方式"></a>配置Hexo使用SSH密钥认证方式</h4><p>修改Hexo站点根目录下的配置文件，在deploy字段将相关配置行修改为SSH格式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ vim _config.yml</span><br><span class="line">......</span><br><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/one-command-deployment</span></span></span><br><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line"><span class="meta">#</span><span class="bash">  repository: https://github.com/srezone/srezone.github.io.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 删除上面这行，上面的URL是用于HTTPS连接，使用用户名密码登录</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 修改为下面这行的格式，用户名和仓库名使用自己的替换即可</span></span></span><br><span class="line">   repository: git@github.com:srezone/srezone.github.io.git</span><br><span class="line">   branch: main</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-<p>重新部署，没有问题，且没有了输入用户名和密码的环节，显得非常流畅顺滑：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 329 ms</span><br><span class="line">INFO  0 files generated in 383 ms</span><br><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line">nothing to commit, working directory clean</span><br><span class="line">Branch master set up to track remote branch main from git@github.com:srezone/srezone.github.io.git.</span><br><span class="line">Everything up-to-date</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="prev" title="在Hexo推送博客期间出现的问题与解决方案">
+      <i class="fa fa-chevron-left"></i> 在Hexo推送博客期间出现的问题与解决方案
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" class="post-title-link" itemprop="url">Facebook F4 两级Clos网络架构-纯图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-08 15:55:31" itemprop="dateCreated datePublished" datetime="2021-02-08T15:55:31+08:00">2021-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-17 14:48:05" itemprop="dateModified" datetime="2021-03-17T14:48:05+08:00">2021-03-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://img.imgdb.cn/item/6020edd73ffa7d37b38f4ed5.jpg" alt="Facebook F4"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Hexo 快速入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-22 18:43:10" itemprop="dateCreated datePublished" datetime="2021-01-22T18:43:10+08:00">2021-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-17 14:56:39" itemprop="dateModified" datetime="2021-03-17T14:56:39+08:00">2021-03-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">博客运维</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hexo使用入门，翻译自Hexo安装后的自带文章。</p>
-<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="创建一篇新文章"><a href="#创建一篇新文章" class="headerlink" title="创建一篇新文章"></a>创建一篇新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生产文章页面"><a href="#生产文章页面" class="headerlink" title="生产文章页面"></a>生产文章页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远端站点"><a href="#部署到远端站点" class="headerlink" title="部署到远端站点"></a>部署到远端站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -517,6 +294,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">代理配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">编辑代理软件的配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%B9%B6%E8%AE%BE%E7%BD%AE%E4%B8%BA%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="nav-number">4.2.</span> <span class="nav-text">重启软件并设置为自启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.3.</span> <span class="nav-text">编辑系统的环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">效果测试</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
