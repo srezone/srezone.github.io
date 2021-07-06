@@ -1,453 +1,500 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  
+  <title>Privoxy在Ubuntu 18中的安装与配置 - SREZONE</title>
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="本博客所有文章采用的授权方式为  自由转载-非商用-非衍生-保持署名  ，转载时请务必注明出处，谢谢！！！ 郑重声明：本篇文章欢迎转发，但请保留原作者信息！ 博客：srezone； 微信公众号：开源小馆； 文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！  前言使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Doc">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Privoxy在Ubuntu 18中的安装与配置">
-<meta property="og:url" content="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
-<meta property="og:site_name" content="SREZONE">
-<meta property="og:description" content="本博客所有文章采用的授权方式为  自由转载-非商用-非衍生-保持署名  ，转载时请务必注明出处，谢谢！！！ 郑重声明：本篇文章欢迎转发，但请保留原作者信息！ 博客：srezone； 微信公众号：开源小馆； 文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！  前言使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Doc">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png">
-<meta property="article:published_time" content="2021-03-24T01:53:41.000Z">
-<meta property="article:modified_time" content="2021-04-21T02:19:43.248Z">
-<meta property="article:author" content="Richard Lee">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="Privoxy">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png">
-
-<link rel="canonical" href="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <title>Privoxy在Ubuntu 18中的安装与配置 | SREZONE</title>
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<link  rel="stylesheet" href="/css/main.css" />
 
-</head>
+<!-- 自定义样式保持在最底部 -->
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SREZONE</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">SREZONE</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Privoxy在Ubuntu 18中的安装与配置">
+              
+            </span>
 
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-24 09:53" pubdate>
+        2021年3月24日 上午
+      </time>
+    </span>
+  
+</div>
 
+<div class="mt-1">
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Privoxy在Ubuntu 18中的安装与配置
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-24 09:53:41" itemprop="dateCreated datePublished" datetime="2021-03-24T09:53:41+08:00">2021-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:19:43" itemprop="dateModified" datetime="2021-04-21T10:19:43+08:00">2021-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenStack-Helm/" itemprop="url" rel="index"><span itemprop="name">OpenStack-Helm</span></a>
-                </span>
-            </span>
+            
+          </div>
 
           
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Privoxy在Ubuntu 18中的安装与配置</h1>
+            
+            <div class="markdown-body">
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
 <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>局域网中代理服务器端的IP地址：192.168.0.60（不在本文讨论范围内）</p>
 <p>客户端操作系统：Ubuntu 18.04</p>
 <p>客户端IP地址：192.168.2.233</p>
 <p>系统APT源列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ cat /etc/apt/sources.list</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo apt-get install privoxy</span><br></pre></td></tr></table></figure>
-<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><h4 id="编辑代理软件的配置文件"><a href="#编辑代理软件的配置文件" class="headerlink" title="编辑代理软件的配置文件"></a>编辑代理软件的配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo vim /etc/privoxy/config</span><br><span class="line">......</span><br><span class="line"><span class="meta">#</span><span class="bash">      注释：在此处配置软件监听使用的端口号，默认使用本机的8118端口，用来接收本机转发过来的流量</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      Suppose you are running Privoxy on an IPv6-capable machine and</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      you want it to listen on the IPv6 address of the loopback</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      device:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        listen-address [::1]:8118</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">listen-address  127.0.0.1:8118</span></span><br><span class="line">listen-address  [::1]:8118</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      注释：此处的配置，是将本地转发到8118端口的流量，转发到192.168.0.60:10808，此接口是局域网中代理软件提供的</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      To chain Privoxy and Tor, both running on the same system, you</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      would use something like:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        forward-socks5t   /               127.0.0.1:9050 .</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forward-socks5 / 192.168.0.60:10808 .</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      注释：此处按格式填写不想让软件进行转发代理的网段，一般情况多为本地局域网的网段</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">      Note that <span class="keyword">if</span> you got Tor through one of the bundles, you may</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      have to change the port from 9050 to 9150 (or even another</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      one). For details, please check the documentation on the Tor</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      website.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      The public Tor network can&#x27;t be used to reach your local</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">      network, <span class="keyword">if</span> you need to access <span class="built_in">local</span> servers you therefore</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      might want to make some exceptions:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        forward         192.168.*.*/     .</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">        forward            10.*.*.*/     .</span></span><br><span class="line"><span class="meta">#</span><span class="bash">        forward           127.*.*.*/     .</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forward         192.168.*.*/     .</span></span><br><span class="line">forward            10.*.*.*/     .</span><br><span class="line">forward           127.*.*.*/     .</span><br><span class="line">forward           172.24.*.*/    .</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  注释：若网络不稳定，建议开启软件的转发重试功能</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Examples:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      forwarded-connect-retries 1</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forwarded-connect-retries  1</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br></pre></td></tr></table></figure>
-<h4 id="重启软件并设置为自启动"><a href="#重启软件并设置为自启动" class="headerlink" title="重启软件并设置为自启动"></a>重启软件并设置为自启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo systemctl restart privoxy</span><br><span class="line">noone@noone-virtual-machine:~$ sudo systemctl enable privoxy</span><br><span class="line">noone@noone-virtual-machine:~$ sudo systemctl status privoxy</span><br><span class="line">● privoxy.service - Privacy enhancing HTTP Proxy</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/privoxy.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Wed 2021-03-24 06:29:00 CST; 3h 49min ago</span><br><span class="line">     Docs: man:privoxy(8)</span><br><span class="line">           https://www.privoxy.org/user-manual/</span><br><span class="line"> Main PID: 26737 (privoxy)</span><br><span class="line">    Tasks: 1 (limit: 4915)</span><br><span class="line">   CGroup: /system.slice/privoxy.service</span><br><span class="line">           └─26737 /usr/sbin/privoxy --pidfile /var/run/privoxy.pid --user privoxy /etc/privoxy/config</span><br><span class="line"></span><br><span class="line">3月 24 06:28:59 noone-virtual-machine systemd[1]: Starting Privacy enhancing HTTP Proxy...</span><br><span class="line">3月 24 06:29:00 noone-virtual-machine systemd[1]: Started Privacy enhancing HTTP Proxy.</span><br></pre></td></tr></table></figure>
-<h4 id="编辑系统的环境变量"><a href="#编辑系统的环境变量" class="headerlink" title="编辑系统的环境变量"></a>编辑系统的环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ vim ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">enable</span> programmable completion features (you don<span class="string">&#x27;t need to enable</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> this, <span class="keyword">if</span> it<span class="string">&#x27;s already enabled in /etc/bash.bashrc and /etc/profile</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sources /etc/bash.bashrc).</span></span><br><span class="line">if ! shopt -oq posix; then</span><br><span class="line">  if [ -f /usr/share/bash-completion/bash_completion ]; then</span><br><span class="line">    . /usr/share/bash-completion/bash_completion</span><br><span class="line">  elif [ -f /etc/bash_completion ]; then</span><br><span class="line">    . /etc/bash_completion</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注释：在.bashrc文件末尾追加如下配置，使得命令行工具产生的流量转发给Privoxy软件进行处理</span></span><br><span class="line">export ftp_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export http_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export https_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export no_proxy=&quot;localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,172.24.0.0/12,192.168.0.0/16,172.17.0.1,.svc.cluster.local&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:/tmp$ wget www.google.com</span><br><span class="line">--2021-03-24 10:21:45--  http://www.google.com/</span><br><span class="line">Connecting to 127.0.0.1:8118... connected.</span><br><span class="line">Proxy request sent, awaiting response... 200 OK</span><br><span class="line">Length: 12823 (13K) [text/html]</span><br><span class="line">Saving to: ‘index.html’</span><br><span class="line"></span><br><span class="line">index.html                                                          100%[=====&gt;]  12.52K  --.-KB/s    in 0s      </span><br><span class="line"></span><br><span class="line">2021-03-24 10:21:47 (187 MB/s) - ‘index.html’ saved [12823/12823]</span><br><span class="line"></span><br><span class="line">noone@noone-virtual-machine:/tmp$ wget www.youtube.com</span><br><span class="line">URL transformed to HTTPS due to an HSTS policy</span><br><span class="line">--2021-03-24 10:23:09--  https://www.youtube.com/</span><br><span class="line">Connecting to 127.0.0.1:8118... connected.</span><br><span class="line">Proxy request sent, awaiting response... 200 OK</span><br><span class="line">Length: unspecified [text/html]</span><br><span class="line">Saving to: ‘index.html.1’</span><br><span class="line"></span><br><span class="line">index.html.1                                                        100%[=====&gt;] 564.69K  90.4KB/s    in 14s     </span><br><span class="line"></span><br><span class="line">2021-03-24 10:23:25 (41.1 KB/s) - ‘index.html.1’ saved [578247]</span><br><span class="line"></span><br><span class="line">noone@noone-virtual-machine:/tmp$ </span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ cat /etc/apt/sources.list<br>deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse<br>deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse<br>deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse<br>deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse<br>deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse<br>deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo apt-get install privoxy<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><h4 id="编辑代理软件的配置文件"><a href="#编辑代理软件的配置文件" class="headerlink" title="编辑代理软件的配置文件"></a>编辑代理软件的配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo vim /etc/privoxy/config<br>......<br><span class="hljs-meta">#</span><span class="bash">      注释：在此处配置软件监听使用的端口号，默认使用本机的8118端口，用来接收本机转发过来的流量</span><br><span class="hljs-meta">#</span><span class="bash">      Suppose you are running Privoxy on an IPv6-capable machine and</span><br><span class="hljs-meta">#</span><span class="bash">      you want it to listen on the IPv6 address of the loopback</span><br><span class="hljs-meta">#</span><span class="bash">      device:</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#        listen-address [::1]:8118</span></span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">listen-address  127.0.0.1:8118</span><br>listen-address  [::1]:8118<br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">......</span><br><span class="hljs-meta">#</span><span class="bash">      注释：此处的配置，是将本地转发到8118端口的流量，转发到192.168.0.60:10808，此接口是局域网中代理软件提供的</span><br><span class="hljs-meta">#</span><span class="bash">      To chain Privoxy and Tor, both running on the same system, you</span><br><span class="hljs-meta">#</span><span class="bash">      would use something like:</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#        forward-socks5t   /               127.0.0.1:9050 .</span></span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">forward-socks5 / 192.168.0.60:10808 .</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#      注释：此处按格式填写不想让软件进行转发代理的网段，一般情况多为本地局域网的网段</span></span><br><span class="hljs-meta">#</span><span class="bash">      Note that <span class="hljs-keyword">if</span> you got Tor through one of the bundles, you may</span><br><span class="hljs-meta">#</span><span class="bash">      have to change the port from 9050 to 9150 (or even another</span><br><span class="hljs-meta">#</span><span class="bash">      one). For details, please check the documentation on the Tor</span><br><span class="hljs-meta">#</span><span class="bash">      website.</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#      The public Tor network can&#x27;t be used to reach your local</span></span><br><span class="hljs-meta">#</span><span class="bash">      network, <span class="hljs-keyword">if</span> you need to access <span class="hljs-built_in">local</span> servers you therefore</span><br><span class="hljs-meta">#</span><span class="bash">      might want to make some exceptions:</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#        forward         192.168.*.*/     .</span></span><br><span class="hljs-meta">#</span><span class="bash">        forward            10.*.*.*/     .</span><br><span class="hljs-meta">#</span><span class="bash">        forward           127.*.*.*/     .</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">forward         192.168.*.*/     .</span><br>forward            10.*.*.*/     .<br>forward           127.*.*.*/     .<br>forward           172.24.*.*/    .<br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">......</span><br><span class="hljs-meta">#</span><span class="bash">  注释：若网络不稳定，建议开启软件的转发重试功能</span><br><span class="hljs-meta">#</span><span class="bash">  Examples:</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#      forwarded-connect-retries 1</span></span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">forwarded-connect-retries  1</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash">......</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="重启软件并设置为自启动"><a href="#重启软件并设置为自启动" class="headerlink" title="重启软件并设置为自启动"></a>重启软件并设置为自启动</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo systemctl restart privoxy<br>noone@noone-virtual-machine:~$ sudo systemctl enable privoxy<br>noone@noone-virtual-machine:~$ sudo systemctl status privoxy<br>● privoxy.service - Privacy enhancing HTTP Proxy<br>   Loaded: loaded (/lib/systemd/system/privoxy.service; enabled; vendor preset: enabled)<br>   Active: active (running) since Wed 2021-03-24 06:29:00 CST; 3h 49min ago<br>     Docs: man:privoxy(8)<br>           https://www.privoxy.org/user-manual/<br> Main PID: 26737 (privoxy)<br>    Tasks: 1 (limit: 4915)<br>   CGroup: /system.slice/privoxy.service<br>           └─26737 /usr/sbin/privoxy --pidfile /var/run/privoxy.pid --user privoxy /etc/privoxy/config<br><br>3月 24 06:28:59 noone-virtual-machine systemd[1]: Starting Privacy enhancing HTTP Proxy...<br>3月 24 06:29:00 noone-virtual-machine systemd[1]: Started Privacy enhancing HTTP Proxy.<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="编辑系统的环境变量"><a href="#编辑系统的环境变量" class="headerlink" title="编辑系统的环境变量"></a>编辑系统的环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ vim ~/.bashrc<br><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">enable</span> programmable completion features (you don<span class="hljs-string">&#x27;t need to enable</span></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-string"> this, if it&#x27;</span>s already enabled <span class="hljs-keyword">in</span> /etc/bash.bashrc and /etc/profile</span><br><span class="hljs-meta">#</span><span class="bash"> sources /etc/bash.bashrc).</span><br>if ! shopt -oq posix; then<br>  if [ -f /usr/share/bash-completion/bash_completion ]; then<br>    . /usr/share/bash-completion/bash_completion<br>  elif [ -f /etc/bash_completion ]; then<br>    . /etc/bash_completion<br>  fi<br>fi<br><span class="hljs-meta">#</span><span class="bash"> 注释：在.bashrc文件末尾追加如下配置，使得命令行工具产生的流量转发给Privoxy软件进行处理</span><br>export ftp_proxy=&quot;127.0.0.1:8118&quot;<br>export http_proxy=&quot;127.0.0.1:8118&quot;<br>export https_proxy=&quot;127.0.0.1:8118&quot;<br>export no_proxy=&quot;localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,172.24.0.0/12,192.168.0.0/16,172.17.0.1,.svc.cluster.local&quot;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:/tmp$ wget www.google.com<br>--2021-03-24 10:21:45--  http://www.google.com/<br>Connecting to 127.0.0.1:8118... connected.<br>Proxy request sent, awaiting response... 200 OK<br>Length: 12823 (13K) [text/html]<br>Saving to: ‘index.html’<br><br>index.html                                                          100%[=====&gt;]  12.52K  --.-KB/s    in 0s      <br><br>2021-03-24 10:21:47 (187 MB/s) - ‘index.html’ saved [12823/12823]<br><br>noone@noone-virtual-machine:/tmp$ wget www.youtube.com<br>URL transformed to HTTPS due to an HSTS policy<br>--2021-03-24 10:23:09--  https://www.youtube.com/<br>Connecting to 127.0.0.1:8118... connected.<br>Proxy request sent, awaiting response... 200 OK<br>Length: unspecified [text/html]<br>Saving to: ‘index.html.1’<br><br>index.html.1                                                        100%[=====&gt;] 564.69K  90.4KB/s    in 14s     <br><br>2021-03-24 10:23:25 (41.1 KB/s) - ‘index.html.1’ saved [578247]<br><br>noone@noone-virtual-machine:/tmp$ <br></code></pre></div></td></tr></table></figure>
+
 <p>在局域网中，用于提供最终代理服务的服务器是：192.168.0.60，在监听192.168.0.60:10808端口来接受SOCKS5协议的流量。</p>
-<p><img src="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png" alt="局域网代理软件v2rayN的转发日志"></p>
+<p><img src="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png" srcset="/img/loading.gif" lazyload alt="局域网代理软件v2rayN的转发日志"></p>
 <p>观察日志，可以确认使用了Privoxy的Ubuntu已经成功将Linux终端命令行产生的流量转发给代理服务器处理了。</p>
 
-    </div>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/OpenStack-Helm/">OpenStack-Helm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Privoxy/">Privoxy</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用7年的笔记本保养升级</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                        <span class="hidden-mobile">在Hexo推送博客期间出现的问题与解决方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
-              <a href="/tags/Privoxy/" rel="tag"># Privoxy</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="prev" title="在Hexo推送博客期间出现的问题与解决方案">
-      <i class="fa fa-chevron-left"></i> 在Hexo推送博客期间出现的问题与解决方案
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" rel="next" title="使用7年的笔记本保养升级">
-      使用7年的笔记本保养升级 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            
+          </article>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">代理配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">编辑代理软件的配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%B9%B6%E8%AE%BE%E7%BD%AE%E4%B8%BA%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="nav-number">4.2.</span> <span class="nav-text">重启软件并设置为自启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.3.</span> <span class="nav-text">编辑系统的环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">效果测试</span></a></li></ol></div>
       </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Richard Lee</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/srezone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;srezone" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:noone@open-source.cc" title="E-Mail → mailto:noone@open-source.cc" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Richard Lee</span>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-        
-
-
-
-
-
-
-
-
       </div>
-    </footer>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
 
   
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

@@ -1,926 +1,612 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="SREZONE">
-<meta property="og:url" content="http://srezone.github.io/index.html">
-<meta property="og:site_name" content="SREZONE">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Richard Lee">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://srezone.github.io/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>SREZONE</title>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  
+  <title>SREZONE</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<link  rel="stylesheet" href="/css/main.css" />
 
-</head>
+<!-- 自定义样式保持在最底部 -->
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SREZONE</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">SREZONE</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Stay Hungry. Stay Foolish.">
+              
+            </span>
 
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/" class="post-title-link" itemprop="url">王垠-如何掌握所有的程序语言</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-14 16:38:35" itemprop="dateCreated datePublished" datetime="2021-04-14T16:38:35+08:00">2021-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:19:27" itemprop="dateModified" datetime="2021-04-21T10:19:27+08:00">2021-04-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>本篇博文转载自博客网站：<a target="_blank" rel="noopener" href="http://www.yinwang.org/">当然我在扯淡</a>，经研读思考后觉得受益良多，特此转载收藏！</p>
-<p>原文连接：<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2017/07/06/master-pl">http://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></p>
-<p>原文作者：王垠</p>
-<p>声明：此次转载，不会对原文内容做任何修改，如涉及作品内容、版权和其它问题，请联系我删除此篇转载文章。</p>
-<hr>
-<h3 id="如何掌握所有的程序语言"><a href="#如何掌握所有的程序语言" class="headerlink" title="如何掌握所有的程序语言"></a>如何掌握所有的程序语言</h3><p>对的，我这里要讲的不是如何掌握一种程序语言，而是所有的……</p>
-<p>很多编程初学者至今还在给我写信请教，问我该学习什么程序语言，怎么学习。由于我知道如何掌握“所有”的程序语言，总是感觉这种该学“一种”什么语言的问题比较低级，所以一直没来得及回复他们 :P 可是逐渐的，我发现原来不只是小白们有这个问题，就连美国大公司的很多资深工程师，其实也没搞明白。</p>
-<p>今天我有动力了，想来统一回答一下这个搁置已久的“初级问题”。类似的话题貌似曾经写过，然而现在我想把它重新写一遍。因为在跟很多人交流之后，我对自己头脑中的（未转化为语言的）想法，有了更精准的表达。</p>
-<p>如果你存在以下的种种困惑，那么这篇文章也许会对你有所帮助：</p>
-<ol>
-<li> 你是编程初学者，不知道该选择什么程序语言来入门。</li>
-<li> 你是资深的程序员或者团队领导，对新出现的种种语言感到困惑，不知道该“投资”哪种语言。</li>
-<li> 你的团队为使用哪种程序语言争论不休，发生各种宗教斗争。</li>
-<li> 你追逐潮流采用了某种时髦的语言，结果两个月之后发现深陷泥潭，痛苦不堪……</li>
-</ol>
-<p>虽然我已经不再过问这些世事，然而无可置疑的现实是，程序语言仍然是很重要的话题，这个情况短时间内不会改变。程序员的岗位往往会要求熟悉某些语言，甚至某些奇葩的公司要求你“深入理解 OOP 或者 FP 设计模式”。对于在职的程序员，程序语言至今仍然是可以争得面红耳赤的宗教话题。它的宗教性之强，以至于我在批评和调侃某些语言（比如 Go 语言）的时候，有些人会本能地以为我是另外一种语言（比如 Java）的粉丝。</p>
-<p>显然我不可能是任何一种语言的粉丝，我甚至不是 Yin 语言的粉丝 ;) 对于任何从没见过的语言，我都是直接拿起来就用，而不需要经过学习的过程。看了这篇文章，也许你会明白我为什么可以达到这个效果。理解了这里面的东西，每个程序员都应该可以做到这一点。嗯，但愿吧。</p>
-<h3 id="重视语言特性，而不是语言"><a href="#重视语言特性，而不是语言" class="headerlink" title="重视语言特性，而不是语言"></a>重视语言特性，而不是语言</h3><p>很多人在乎自己或者别人是否“会”某种语言，对“发明”了某种语言的人倍加崇拜，为各种语言的孰优孰劣争得面红耳赤。这些问题对于我来说都是不存在的。虽然我写文章批评过不少语言的缺陷，在实际工作中我却很少跟人争论这些。如果有其它人在我身边争论，我甚至会戴上耳机，都懒得听他们说什么 ;) 为什么呢？我发现归根结底的原因，是因为我重视的是“语言特性”，而不是整个的“语言”。我能用任何语言写出不错的代码，就算再糟糕的语言也差不了多少。</p>
-<p>任何一种“语言”，都是各种“语言特性”的组合。打个比方吧，一个程序语言就像一台电脑。它的牌子可能叫“联想”，或者“IBM”，或者“Dell”，或者“苹果”。那么，你可以说苹果一定比 IBM 好吗？你不能。你得看看它里面装的是什么型号的处理器，有多少个核，主频多少，有多少 L1 cache，L2 cache……，有多少内存和硬盘，显示器分辨率有多大，显卡是什么 GPU，网卡速度，等等各种“配置”。有时候你还得看各个组件之间的兼容性。</p>
-<p>这些配置对应到程序语言里面，就是所谓“语言特性”。举一些语言特性的例子：</p>
-<ul>
-<li>  变量定义</li>
-<li>  算术运算</li>
-<li>  for 循环语句，while 循环语句</li>
-<li>  函数定义，函数调用</li>
-<li>  递归</li>
-<li>  静态类型系统</li>
-<li>  类型推导</li>
-<li>  lambda 函数</li>
-<li>  面向对象</li>
-<li>  垃圾回收</li>
-<li>  指针算术</li>
-<li>  goto 语句</li>
-</ul>
-<p>这些语言特性，就像你在选择一台电脑的时候，看它里面是什么配置。选电脑的时候，没有人会说 Dell 一定是最好的，他们只会说这个型号里面装的是 Intel 的 i7 处理器，这个比 i5 的好，DDR3 的内存 比 DDR2 的快这么多，SSD 比磁盘快很多，ATI 的显卡是垃圾…… 如此等等。</p>
-<p>程序语言也是一样的道理。对于初学者来说，其实没必要纠结到底要先学哪一种语言，再学哪一种。曾经有人给我发信问这种问题，纠结了好几个星期，结果一个语言都还没开始学。有这纠结的时间，其实都可以把他纠结过的语言全部掌握了。</p>
-<p>初学者往往不理解，每一种语言里面必然有一套“通用”的特性。比如变量，函数，整数和浮点数运算，等等。这些是每个通用程序语言里面都必须有的，一个都不能少。你只要通过“某种语言”学会了这些特性，掌握这些特性的根本概念，就能随时把这些知识应用到任何其它语言。你为此投入的时间基本不会浪费。所以初学者纠结要“先学哪种语言”，这种时间花的很不值得，还不如随便挑一个语言，跳进去。</p>
-<p>如果你不能用一种语言里面的基本特性写出好的代码，那你换成另外一种语言也无济于事。你会写出一样差的代码。我经常看到有些人 Java 代码写得相当乱，相当糟糕，却骂 Java 不好，雄心勃勃要换用 Go 语言。这些人没有明白，是否能写出好的代码在于人，而不在于语言。如果你的心中没有清晰简单的思维模型，你用任何语言表述出来都是一堆乱麻。如果你 Java 代码写得很糟糕，那么你写 Go 语言代码也会一样糟糕，甚至更差。</p>
-<p>很多初学者不了解，一个高明的程序员如果开始用一种新的程序语言，他往往不是去看这个语言的大部头手册或者书籍，而是先有一个需要解决的问题。手头有了问题，他可以用两分钟浏览一下这语言的手册，看看这语言大概长什么样。然后，他直接拿起一段例子代码来开始修改捣鼓，想法把这代码改成自己正想解决的问题。在这个简短的过程中，他很快的掌握了这个语言，并用它表达出心里的想法。</p>
-<p>在这个过程中，随着需求的出现，他可能会问这样的问题：</p>
-<ul>
-<li>  这个语言的“变量定义”是什么语法，需要“声明类型”吗，还是可以用“类型推导”？</li>
-<li>  它的“类型”是什么语法？是否支持“泛型”？泛型的 “variance” 如何表达？</li>
-<li>  这个语言的“函数”是什么语法，“函数调用”是什么语法，可否使用“缺省参数”？</li>
-<li>  ……</li>
-</ul>
-<p>注意到了吗？上面每一个引号里面的内容，都是一种语言特性（或者叫概念）。这些概念可以存在于任何的语言里面，虽然语法可能不一样，它们的本质都是一样的。比如，有些语言的参数类型写在变量前面，有些写在后面，有些中间隔了一个冒号，有些没有。</p>
-<p>这些实际问题都是随着写实际的代码，解决手头的问题，自然而然带出来的，而不是一开头就抱着语言手册看得仔仔细细。因为掌握了语言特性的人都知道，自己需要的特性，在任何语言里面一定有对应的表达方式。如果没有直接的方式表达，那么一定有某种“绕过方式”。如果有直接的表达方式，那么它只是语法稍微有所不同而已。所以，他是带着问题找特性，就像查字典一样，而不是被淹没于大部头的手册里面，昏昏欲睡一个月才开始写代码。</p>
-<p>掌握了通用的语言特性，剩下的就只剩某些语言“特有”的特性了。研究语言的人都知道，要设计出新的，好的，无害的特性，是非常困难的。所以一般说来，一种好的语言，它所特有的新特性，终究不会超过一两种。如果有个语言号称自己有超过 5 种新特性，那你就得小心了，因为它们带来的和可能不是优势，而是灾难！</p>
-<p>同样的道理，最好的语言研究者，往往不是某种语言的设计者，而是某种关键语言特性的设计者（或者支持者）。举个例子，著名的计算机科学家 Dijkstra 就是“递归”的强烈支持者。现在的语言里面都有递归，然而你可能不知道，早期的程序语言是不支持递归的。直到 Dijkstra 强烈要求 Algol 60 委员会加入对递归的支持，这个局面才改变了。Tony Hoare 也是语言特性设计者。他设计了几个重要的语言特性，却没有设计过任何语言。另外大家不要忘了，有个语言专家叫王垠，他是早期 union type 的支持者和实现者，也是 checked exception 特性的支持者，他在自己的<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2017/05/23/kotlin">博文</a>里指出了 checked exception 和 union type 之间的关系 :P</p>
-<p>很多人盲目的崇拜语言设计者，只要听到有人设计（或者美其民曰“发明”）了一个语言，就热血沸腾，佩服的五体投地。他们却没有理解，其实所有的程序语言，不过是像 Dell，联想一样的“组装机”。语言特性的设计者，才是像 Intel，AMD，ARM，Qualcomm 那样核心技术的创造者。</p>
-<h3 id="合理的入门语言"><a href="#合理的入门语言" class="headerlink" title="合理的入门语言"></a>合理的入门语言</h3><p>所以初学者要想事半功倍，就应该从一种“合理”的，没有明显严重问题的语言出发，掌握最关键的语言特性，然后由此把这些概念应用到其它语言。哪些是合理的入门语言呢？我个人觉得这些语言都可以用来入门：</p>
-<ul>
-<li>  Scheme</li>
-<li>  C</li>
-<li>  Java</li>
-<li>  Python</li>
-<li>  JavaScript</li>
-</ul>
-<p>那么相比之下，我不推荐用哪些语言入门呢？</p>
-<ul>
-<li>  Shell</li>
-<li>  PowerShell</li>
-<li>  AWK</li>
-<li>  Perl</li>
-<li>  PHP</li>
-<li>  Basic</li>
-<li>  Go</li>
-<li>  Rust</li>
-</ul>
-<p>总的说来，你不应该使用所谓“<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2013/03/29/scripting-language">脚本语言</a>”作为入门语言，特别是那些源于早期 Unix 系统的脚本语言工具。PowerShell 虽然比 Unix 的 Shell 有所进步，然而它仍然没有摆脱脚本语言的根本问题——他们的设计者不知道他们自己在干什么 :P</p>
-<p>采用脚本语言学编程，一个很严重的问题就是使得学习者抓不住关键。脚本语言往往把一些系统工具性质的东西（比如正则表达式，Web 概念）加入到语法里面，导致初学者为它们浪费太多时间，却没有理解编程最关键的概念：变量，函数，递归，类型……</p>
-<p>不推荐 Go 语言的原因类似，虽然 Go 语言不算脚本语言，然而他的设计者显然不明白自己在干什么。所以使用 Go 语言来学编程，你不能专注于最关键，最好的语言特性。关于 Go 语言的各种毛病，你可以参考这篇<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2014/04/18/golang">文章</a>。</p>
-<p>同样的，我不觉得 Rust 适合作为入门语言。Rust 花了太大精力来夸耀它的“新特性”，而这些新特性不但不是最关键的部分，而且很多是有问题的。初学者过早的关注这些特性，不仅学不会最关键的编程思想，而且可能误入歧途。关于 Rust 的一些问题，你可以参考这篇<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2016/09/18/rust">文章</a>。</p>
-<h3 id="掌握关键语言特性，忽略次要特性"><a href="#掌握关键语言特性，忽略次要特性" class="headerlink" title="掌握关键语言特性，忽略次要特性"></a>掌握关键语言特性，忽略次要特性</h3><p>为了达到我之前提到的融会贯通，一通百通的效果，初学者应该专注于语言里面最关键的特性，而不是被次要的特性分心。</p>
-<p>举个夸张点的例子。我发现很多编程培训班和野鸡大学的编程入门课，往往一来就教学生如何使用 printf 打印“Hello World！”，进而要他们记忆 printf 的各种“格式字符”的意义，要他们实现各种复杂格式的打印输出，甚至要求打印到文本文件里，然后再读出来……</p>
-<p>可是殊不知，这种输出输入操作其实根本不算是语言的一部分，而且对于掌握编程的核心概念来说，都是次要的。有些人的 Java 课程进行了好几个星期，居然还在布置各种 printf 的作业。学生写出几百行的 printf，却不理解变量和函数是什么，甚至连算术语句和循环语句都不知道怎么用！这就是为什么很多初学者感觉编程很难，我连 <code>%d</code>，<code>%f</code>，<code>%.2f</code> 的含义都记不住，还怎么学编程！</p>
-<p>然而这些野鸡大学的“教授”头衔是如此的洗脑，以至于被他们教过的学生（比如我女朋友）到我这里请教，居然骂我净教一些没用的东西，学了连 printf 的作业都没法完成 :P 你别跟我讲 for 循环，函数什么的了…… 可不可以等几个月，等我背熟了 printf 的用法再学那些啊？</p>
-<p>所以你就发现一旦被差劲的老师教过，这个程序员基本就毁了。就算遇到好的老师，他们也很难纠正过来。</p>
-<p>当然这是一个夸张的例子，因为 printf 根本不算是语言特性，但这个例子从同样的角度说明了次要肤浅的语言特性带来的问题。</p>
-<p>这里举一些次要语言特性的例子：</p>
-<ul>
-<li>  C 语言的语句块，如果里面只有一条语句，可以不打花括号。</li>
-<li>  Go 语言的函数参数类型如果一样可以合并在一起写，比如 <code>func foo(s string, x, y, z int, c bool) &#123; ... &#125;</code></li>
-<li>  Perl 把正则表达式作为语言的一种特殊语法</li>
-<li>  JavaScript 语句可以在某些时候省略句尾的分号</li>
-<li>  Haskell 和 ML 等语言的 <a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2013/04/02/currying">currying</a></li>
-</ul>
-<h3 id="自己动手实现语言特性"><a href="#自己动手实现语言特性" class="headerlink" title="自己动手实现语言特性"></a>自己动手实现语言特性</h3><p>在基本学会了各种语言特性，能用它们来写代码之后，下一步的进阶就是去实现它们。只有实现了各种语言特性，你才能完全地拥有它们，成为它们的主人。否则你就只是它们的使用者，你会被语言的设计者牵着鼻子走。</p>
-<p>有个大师说得好，完全理解一种语言最好的方法就是自己动手实现它，也就是自己写一个解释器来实现它的语义。但我觉得这句话应该稍微修改一下：完全理解一种“语言特性”最好的方法就是自己亲自实现它。</p>
-<p>注意我在这里把“语言”改为了“语言特性”。你并不需要实现整个语言来达到这个目的，因为我们最终使用的是语言特性。只要你自己实现了一种语言特性，你就能理解这个特性在任何语言里的实现方式和用法。</p>
-<p>举个例子，学习 SICP 的时候，大家都会亲自用 Scheme 实现一个面向对象系统。用 Scheme 实现的面向对象系统，跟 Java，C++，Python 之类的语言语法相去甚远，然而它却能帮助你理解任何这些 OOP 语言里面的“面向对象”这一概念，它甚至能帮助你理解各种面向对象实现的差异。</p>
-<p>这种效果是你直接学习 OOP 语言得不到的，因为在学习 Java，C++，Python 之类语言的时候，你只是一个用户，而用 Scheme 自己动手实现了 OO 系统之后，你成为了一个创造者。</p>
-<p>类似的特性还包括类型推导，类型检查，惰性求值，如此等等。我实现过几乎所有的语言特性，所以任何语言在我的面前，都是可以被任意拆卸组装的玩具，而不再是凌驾于我之上的神圣。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>写了这么多，重要的话重复三遍：语言特性，语言特性，语言特性，语言特性！不管是初学者还是资深程序员，应该专注于语言特性，而不是纠结于整个的“语言品牌”。只有这样才能达到融会贯通，拿起任何语言几乎立即就会用，并且写出高质量的代码。</p>
-<p>（如果你觉得这篇文章有所帮助，可以<a target="_blank" rel="noopener" href="http://www.yinwang.org/blog-cn/2016/04/13/pay-blog">付款</a>购买，价格随意。）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" class="post-title-link" itemprop="url">使用7年的笔记本保养升级</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-05 14:54:36" itemprop="dateCreated datePublished" datetime="2021-04-05T14:54:36+08:00">2021-04-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:18:31" itemprop="dateModified" datetime="2021-04-21T10:18:31+08:00">2021-04-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<h3 id="2021-01-10"><a href="#2021-01-10" class="headerlink" title="2021-01-10"></a>2021-01-10</h3><p>2014年高考结束购入的战神K660ED4已经不堪重负，经过六年服役早已伤痕累累，期间升级了屏幕、硬盘、内存、散热等，到目前机器配置如下：</p>
-<ul>
-<li>CPU i7 4700HQ</li>
-<li>GPU GTX860M</li>
-<li>MEM 24GB</li>
-<li>DISK 240G固态+120G固态+1T机械</li>
-<li>三块硬盘用于：系统盘、软件盘、资料盘</li>
-</ul>
-<p>目前，老战神存在的问题是：操作系统方面已连轴转了接近4年，软件和数据逐渐膨胀，已经占用了90%空间，导致固态和机械硬盘掉速严重；触控板按键被异物卡死；开机键断裂，容易误触关机；摄像头无法使用，怀疑是排线问题；散热拉垮，轻负载待机温度高达90度，开机即起飞，移动鼠标都能引起风扇狂转。</p>
-<p>于是，周末简单清灰、检查散热情况后，决定开始翻新升级老战神，暂定包括电脑C面、网卡、检修摄像头、更换全新的散热模组、改装水冷、维修触摸板等。</p>
-<p>动手前的拍照留念：</p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64eff5.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64efea.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddbc.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64efef.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddb7.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddb5.jpg"></p>
-<h3 id="2021-01-11"><a href="#2021-01-11" class="headerlink" title="2021-01-11"></a>2021-01-11</h3><p>彻底拆解完毕，开始思考是否换全套外壳，彻彻底底翻新机器外观，裸板如下图，不知道是不是因为日久生情，总觉得板子是如此的漂亮。</p>
-<p><img src="https://img.imgdb.cn/item/606abda78322e6675c7101ef.jpg"></p>
-<h3 id="2021-01-13"><a href="#2021-01-13" class="headerlink" title="2021-01-13"></a>2021-01-13</h3><p>笔记本外壳，键盘压条缺货，完美主义作祟，放弃原汁原味复刻翻新，开始搞DIY！测试老散热器的散热铜管导热情况，使用开水加手摸，哈哈哈哈……</p>
-<p><img src="https://img.imgdb.cn/item/606ab8e28322e6675c6bc8a4.jpg"></p>
-<h3 id="2021-01-20"><a href="#2021-01-20" class="headerlink" title="2021-01-20"></a>2021-01-20</h3><p>不带壳组装好，检测各个零部件以及排线经过拆解是否完好。结果，操他大爷的，吃外卖过程中打翻汤汁，无奈之下开始水洗主板。</p>
-<p><img src="https://img.imgdb.cn/item/606abae58322e6675c6e1e3a.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606ab7f68322e6675c6ad3fc.png"></p>
-<h3 id="2021-02-26"><a href="#2021-02-26" class="headerlink" title="2021-02-26"></a>2021-02-26</h3><p>水洗主板前用酒精清理，无法开机，主板部分芯片发烫，于是水洗后用暖气片烤干，结果仍无法开机。惊喜的是经过一个年假的阴干静置后竟然好了，成功点亮！</p>
-<p><img src="https://img.imgdb.cn/item/606abb5d8322e6675c6e9eb8.png"></p>
-<h3 id="2021-03-02"><a href="#2021-03-02" class="headerlink" title="2021-03-02"></a>2021-03-02</h3><p>散热改装完毕，开始烤机测试！</p>
-<p><img src="https://img.imgdb.cn/item/606abb958322e6675c6ed9ba.png"></p>
-<h3 id="2021-04-05"><a href="#2021-04-05" class="headerlink" title="2021-04-05"></a>2021-04-05</h3><p>和老同学闹情绪了，所以，原计划自己设计的亚克力机箱的图纸暂时没法继续画了，以后再说吧，裸板用也没啥大问题，奉上成品图（暂时过渡）！</p>
-<p><img src="https://img.imgdb.cn/item/606abd358322e6675c7085c2.jpg"></p>
-<p><img src="https://img.imgdb.cn/item/606abd358322e6675c7085c0.jpg"></p>
-<h3 id="费用小结"><a href="#费用小结" class="headerlink" title="费用小结"></a>费用小结</h3><p><img src="https://img.imgdb.cn/item/606abc3e8322e6675c6f8cb0.png"></p>
-<p>暂且告一段落，后面亚克力机箱加工完毕后，再来更新……</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Privoxy在Ubuntu 18中的安装与配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-24 09:53:41" itemprop="dateCreated datePublished" datetime="2021-03-24T09:53:41+08:00">2021-03-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:19:43" itemprop="dateModified" datetime="2021-04-21T10:19:43+08:00">2021-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenStack-Helm/" itemprop="url" rel="index"><span itemprop="name">OpenStack-Helm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
-<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>局域网中代理服务器端的IP地址：192.168.0.60（不在本文讨论范围内）</p>
-<p>客户端操作系统：Ubuntu 18.04</p>
-<p>客户端IP地址：192.168.2.233</p>
-<p>系统APT源列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ cat /etc/apt/sources.list</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo apt-get install privoxy</span><br></pre></td></tr></table></figure>
-<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><h4 id="编辑代理软件的配置文件"><a href="#编辑代理软件的配置文件" class="headerlink" title="编辑代理软件的配置文件"></a>编辑代理软件的配置文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo vim /etc/privoxy/config</span><br><span class="line">......</span><br><span class="line"><span class="meta">#</span><span class="bash">      注释：在此处配置软件监听使用的端口号，默认使用本机的8118端口，用来接收本机转发过来的流量</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      Suppose you are running Privoxy on an IPv6-capable machine and</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      you want it to listen on the IPv6 address of the loopback</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      device:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        listen-address [::1]:8118</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">listen-address  127.0.0.1:8118</span></span><br><span class="line">listen-address  [::1]:8118</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      注释：此处的配置，是将本地转发到8118端口的流量，转发到192.168.0.60:10808，此接口是局域网中代理软件提供的</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      To chain Privoxy and Tor, both running on the same system, you</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      would use something like:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        forward-socks5t   /               127.0.0.1:9050 .</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forward-socks5 / 192.168.0.60:10808 .</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      注释：此处按格式填写不想让软件进行转发代理的网段，一般情况多为本地局域网的网段</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">      Note that <span class="keyword">if</span> you got Tor through one of the bundles, you may</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      have to change the port from 9050 to 9150 (or even another</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      one). For details, please check the documentation on the Tor</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      website.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      The public Tor network can&#x27;t be used to reach your local</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">      network, <span class="keyword">if</span> you need to access <span class="built_in">local</span> servers you therefore</span></span><br><span class="line"><span class="meta">#</span><span class="bash">      might want to make some exceptions:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#        forward         192.168.*.*/     .</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">        forward            10.*.*.*/     .</span></span><br><span class="line"><span class="meta">#</span><span class="bash">        forward           127.*.*.*/     .</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forward         192.168.*.*/     .</span></span><br><span class="line">forward            10.*.*.*/     .</span><br><span class="line">forward           127.*.*.*/     .</span><br><span class="line">forward           172.24.*.*/    .</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  注释：若网络不稳定，建议开启软件的转发重试功能</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Examples:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#      forwarded-connect-retries 1</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">forwarded-connect-retries  1</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash">......</span></span><br></pre></td></tr></table></figure>
-<h4 id="重启软件并设置为自启动"><a href="#重启软件并设置为自启动" class="headerlink" title="重启软件并设置为自启动"></a>重启软件并设置为自启动</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ sudo systemctl restart privoxy</span><br><span class="line">noone@noone-virtual-machine:~$ sudo systemctl enable privoxy</span><br><span class="line">noone@noone-virtual-machine:~$ sudo systemctl status privoxy</span><br><span class="line">● privoxy.service - Privacy enhancing HTTP Proxy</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/privoxy.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Wed 2021-03-24 06:29:00 CST; 3h 49min ago</span><br><span class="line">     Docs: man:privoxy(8)</span><br><span class="line">           https://www.privoxy.org/user-manual/</span><br><span class="line"> Main PID: 26737 (privoxy)</span><br><span class="line">    Tasks: 1 (limit: 4915)</span><br><span class="line">   CGroup: /system.slice/privoxy.service</span><br><span class="line">           └─26737 /usr/sbin/privoxy --pidfile /var/run/privoxy.pid --user privoxy /etc/privoxy/config</span><br><span class="line"></span><br><span class="line">3月 24 06:28:59 noone-virtual-machine systemd[1]: Starting Privacy enhancing HTTP Proxy...</span><br><span class="line">3月 24 06:29:00 noone-virtual-machine systemd[1]: Started Privacy enhancing HTTP Proxy.</span><br></pre></td></tr></table></figure>
-<h4 id="编辑系统的环境变量"><a href="#编辑系统的环境变量" class="headerlink" title="编辑系统的环境变量"></a>编辑系统的环境变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:~$ vim ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">enable</span> programmable completion features (you don<span class="string">&#x27;t need to enable</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> this, <span class="keyword">if</span> it<span class="string">&#x27;s already enabled in /etc/bash.bashrc and /etc/profile</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sources /etc/bash.bashrc).</span></span><br><span class="line">if ! shopt -oq posix; then</span><br><span class="line">  if [ -f /usr/share/bash-completion/bash_completion ]; then</span><br><span class="line">    . /usr/share/bash-completion/bash_completion</span><br><span class="line">  elif [ -f /etc/bash_completion ]; then</span><br><span class="line">    . /etc/bash_completion</span><br><span class="line">  fi</span><br><span class="line">fi</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注释：在.bashrc文件末尾追加如下配置，使得命令行工具产生的流量转发给Privoxy软件进行处理</span></span><br><span class="line">export ftp_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export http_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export https_proxy=&quot;127.0.0.1:8118&quot;</span><br><span class="line">export no_proxy=&quot;localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,172.24.0.0/12,192.168.0.0/16,172.17.0.1,.svc.cluster.local&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">noone@noone-virtual-machine:/tmp$ wget www.google.com</span><br><span class="line">--2021-03-24 10:21:45--  http://www.google.com/</span><br><span class="line">Connecting to 127.0.0.1:8118... connected.</span><br><span class="line">Proxy request sent, awaiting response... 200 OK</span><br><span class="line">Length: 12823 (13K) [text/html]</span><br><span class="line">Saving to: ‘index.html’</span><br><span class="line"></span><br><span class="line">index.html                                                          100%[=====&gt;]  12.52K  --.-KB/s    in 0s      </span><br><span class="line"></span><br><span class="line">2021-03-24 10:21:47 (187 MB/s) - ‘index.html’ saved [12823/12823]</span><br><span class="line"></span><br><span class="line">noone@noone-virtual-machine:/tmp$ wget www.youtube.com</span><br><span class="line">URL transformed to HTTPS due to an HSTS policy</span><br><span class="line">--2021-03-24 10:23:09--  https://www.youtube.com/</span><br><span class="line">Connecting to 127.0.0.1:8118... connected.</span><br><span class="line">Proxy request sent, awaiting response... 200 OK</span><br><span class="line">Length: unspecified [text/html]</span><br><span class="line">Saving to: ‘index.html.1’</span><br><span class="line"></span><br><span class="line">index.html.1                                                        100%[=====&gt;] 564.69K  90.4KB/s    in 14s     </span><br><span class="line"></span><br><span class="line">2021-03-24 10:23:25 (41.1 KB/s) - ‘index.html.1’ saved [578247]</span><br><span class="line"></span><br><span class="line">noone@noone-virtual-machine:/tmp$ </span><br></pre></td></tr></table></figure>
-<p>在局域网中，用于提供最终代理服务的服务器是：192.168.0.60，在监听192.168.0.60:10808端口来接受SOCKS5协议的流量。</p>
-<p><img src="https://img.imgdb.cn/item/605aa3a38322e6675caeeb94.png" alt="局域网代理软件v2rayN的转发日志"></p>
-<p>观察日志，可以确认使用了Privoxy的Ubuntu已经成功将Linux终端命令行产生的流量转发给代理服务器处理了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">在Hexo推送博客期间出现的问题与解决方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-17 14:36:22" itemprop="dateCreated datePublished" datetime="2021-03-17T14:36:22+08:00">2021-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:19:14" itemprop="dateModified" datetime="2021-04-21T10:19:14+08:00">2021-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">博客运维</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">[master 595037e] Site updated: 2021-03-17 11:54:50</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">fatal: unable to access &#x27;https://github.com/srezone/srezone.github.io.git/&#x27;: Encountered end of file</span><br><span class="line">FATAL &#123; err:</span><br><span class="line">   &#123; Error: Spawn failed</span><br><span class="line">       at ChildProcess.task.on.code (/home/noone/WorkSpace/blog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">       at ChildProcess.emit (events.js:198:13)</span><br><span class="line">       at Process.ChildProcess._handle.onexit (internal/child_process.js:248:12) code: 128 &#125; &#125; &#x27;Something\&#x27;s wrong. Maybe you can find the solution here: %s&#x27; &#x27;\u001b[4mhttps://hexo.io/docs/troubleshooting.html\u001b[24m&#x27;</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
-<h3 id="根因定位"><a href="#根因定位" class="headerlink" title="根因定位"></a>根因定位</h3><p>几经搜索尝试，无果，恰好前段时间收到一封Github的邮件，告知如下：</p>
-<p><img src="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png" alt="Github弃用密码访问博客仓库的通知"></p>
-<p>OK，基本了解报错的根因：Github的问题，而不是我这边仓库不一致导致提交冲突等乱七八糟的原因。</p>
-<p>接下来的思路是，配置Hexo使用密钥认证方式完成Git提交：</p>
-<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source ~]$ ssh-keygen -t rsa -b 4096 -C &quot;noone@open-source.cc&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/noone/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /home/noone/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /home/noone/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Z***1/cn********************u/L*****9 noone@open-source.cc</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|                 |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">[noone@open-source ~]$ cd .ssh/</span><br><span class="line">[noone@open-source .ssh]$ ll</span><br><span class="line">total 12</span><br><span class="line">-rw------- 1 noone noone 3243 Mar 17 13:33 id_rsa</span><br><span class="line">-rw-r--r-- 1 noone noone  746 Mar 17 13:33 id_rsa.pub</span><br><span class="line">-rw-r--r-- 1 noone noone 1049 Mar 15 22:11 known_hosts</span><br></pre></td></tr></table></figure>
-<h4 id="配置Github使用密钥认证"><a href="#配置Github使用密钥认证" class="headerlink" title="配置Github使用密钥认证"></a>配置Github使用密钥认证</h4><p>妥善保存私钥文件（id_rsa），将公钥文件（id_rsa.pub）内容复制，粘贴到Github对应的页面中，完成GitHub端的具体配置：</p>
-<p><img src="https://img.imgdb.cn/item/6051a018524f85ce298e6583.png" alt="Github设置密钥登录的配置界面"></p>
-<p>验证密钥配置是否生效，如果配置成功会返回具体提示，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source .ssh]$ ssh -T git@github.com</span><br><span class="line">The authenticity of host &#x27;github.com (13.250.777.333)&#x27; can&#x27;t be established.</span><br><span class="line">RSA key fingerprint is SHA256:n******************************************.</span><br><span class="line">RSA key fingerprint is MD5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com,13.250.777.333&#x27; (RSA) to the list of known hosts.</span><br><span class="line">Hi srezone! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">[noone@open-source .ssh]$</span><br></pre></td></tr></table></figure>
-<h4 id="配置Hexo使用SSH密钥认证方式"><a href="#配置Hexo使用SSH密钥认证方式" class="headerlink" title="配置Hexo使用SSH密钥认证方式"></a>配置Hexo使用SSH密钥认证方式</h4><p>修改Hexo站点根目录下的配置文件，在deploy字段将相关配置行修改为SSH格式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ vim _config.yml</span><br><span class="line">......</span><br><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/one-command-deployment</span></span></span><br><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line"><span class="meta">#</span><span class="bash">  repository: https://github.com/srezone/srezone.github.io.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 删除上面这行，上面的URL是用于HTTPS连接，使用用户名密码登录</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 修改为下面这行的格式，用户名和仓库名使用自己的替换即可</span></span></span><br><span class="line">   repository: git@github.com:srezone/srezone.github.io.git</span><br><span class="line">   branch: main</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-<p>重新部署，没有问题，且没有了输入用户名和密码的环节，显得非常流畅顺滑：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 329 ms</span><br><span class="line">INFO  0 files generated in 383 ms</span><br><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line">nothing to commit, working directory clean</span><br><span class="line">Branch master set up to track remote branch main from git@github.com:srezone/srezone.github.io.git.</span><br><span class="line">Everything up-to-date</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" class="post-title-link" itemprop="url">Facebook F4 两级Clos网络架构-纯图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-08 15:55:31" itemprop="dateCreated datePublished" datetime="2021-02-08T15:55:31+08:00">2021-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-17 14:48:05" itemprop="dateModified" datetime="2021-03-17T14:48:05+08:00">2021-03-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://img.imgdb.cn/item/6020edd73ffa7d37b38f4ed5.jpg" alt="Facebook F4"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Hexo 快速入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-22 18:43:10" itemprop="dateCreated datePublished" datetime="2021-01-22T18:43:10+08:00">2021-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:18:47" itemprop="dateModified" datetime="2021-04-21T10:18:47+08:00">2021-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">博客运维</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<p>Hexo使用入门，翻译自Hexo安装后的自带文章。</p>
-<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><h3 id="创建一篇新文章"><a href="#创建一篇新文章" class="headerlink" title="创建一篇新文章"></a>创建一篇新文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生产文章页面"><a href="#生产文章页面" class="headerlink" title="生产文章页面"></a>生产文章页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远端站点"><a href="#部署到远端站点" class="headerlink" title="部署到远端站点"></a>部署到远端站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息:  <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-
-
-
           </div>
+
           
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
       </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Richard Lee</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/srezone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;srezone" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:noone@open-source.cc" title="E-Mail → mailto:noone@open-source.cc" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
 
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/" target="_self">
+          王垠-如何掌握所有的程序语言
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/" target="_self">
+          
+          
+            
+          
+          
+本篇博文转载自博客网站：当然我在扯淡，经研读思考后觉得受益良多，特此转载收藏！
+原文连接：http://www.yinwang.org/blog-cn/2017/07/06/master-pl
+原文作者：王垠
+声明：此次转载，不会对原文内容做任何修改，如涉及作品内容、版权和其它问题，请联系我删除此篇转载文章。
+
+如何掌握所有的程序语言对的，我这里要讲的不是如何掌握一种程序语言，而是所有的……
+很
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-14 16:38" pubdate>
+              2021-04-14
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a>
+            
+          </div>
+        
       </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Richard Lee</span>
-</div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+    </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" target="_self">
+          使用7年的笔记本保养升级
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" target="_self">
+          
+          
+            
+          
+          2021-01-102014年高考结束购入的战神K660ED4已经不堪重负，经过六年服役早已伤痕累累，期间升级了屏幕、硬盘、内存、散热等，到目前机器配置如下：
+
+CPU i7 4700HQ
+GPU GTX860M
+MEM 24GB
+DISK 240G固态+120G固态+1T机械
+三块硬盘用于：系统盘、软件盘、资料盘
+
+目前，老战神存在的问题是：操作系统方面已连轴转了接近4年，软件和数据逐渐膨胀，已
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-05 14:54" pubdate>
+              2021-04-05
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+          Privoxy在Ubuntu 18中的安装与配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          
+            
+          
+          前言使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 09:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/OpenStack-Helm/">OpenStack-Helm</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">Linux</a>
+            
+              <a href="/tags/Ubuntu/">Ubuntu</a>
+            
+              <a href="/tags/Privoxy/">Privoxy</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+          在Hexo推送博客期间出现的问题与解决方案
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+          
+          
+            
+          
+          问题背景近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错：
+123456789101112131415[noone@open-source blog]$ hexo dINFO  Validating configINFO  Deploying: gitINFO  Clearing .deploy_git folder...INFO  Copying files from p
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-17 14:36" pubdate>
+              2021-03-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/">博客运维</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Hexo/">Hexo</a>
+            
+              <a href="/tags/Git/">Git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" target="_self">
+          Facebook F4 两级Clos网络架构-纯图
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" target="_self">
+          
+          
+            
+          
+          
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-08 15:55" pubdate>
+              2021-02-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Clos/">Clos</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_self">
+          Hexo 快速入门
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_self">
+          
+          
+            
+          
+          Hexo使用入门，翻译自Hexo安装后的自带文章。
+快速入门创建一篇新文章1$ hexo new &quot;My New Post&quot;
+
+更多信息:  Writing
+运行服务1$ hexo server
+
+更多信息:  Server
+生产文章页面1$ hexo generate
+
+更多信息:  Generating
+部署到远端站点1$ hexo deploy
+
+更多信息:  Deplo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-22 18:43" pubdate>
+              2021-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/">博客运维</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Hexo/">Hexo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <div class="statistics">
+    
+    
 
-<script src="/js/utils.js"></script>
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
 
-<script src="/js/motion.js"></script>
+
+  
+
+  
+</footer>
 
 
-<script src="/js/schemes/pisces.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-<script src="/js/next-boot.js"></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
@@ -934,15 +620,47 @@
 
 
 
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
 
 
 
 
 
 
-  
 
-  
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>

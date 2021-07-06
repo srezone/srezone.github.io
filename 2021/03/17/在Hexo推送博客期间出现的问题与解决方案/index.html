@@ -1,452 +1,497 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  
+  <title>在Hexo推送博客期间出现的问题与解决方案 - SREZONE</title>
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="本博客所有文章采用的授权方式为  自由转载-非商用-非衍生-保持署名  ，转载时请务必注明出处，谢谢！！！ 郑重声明：本篇文章欢迎转发，但请保留原作者信息！ 博客：srezone； 微信公众号：开源小馆； 文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！  问题背景近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错： 123456789101112131415[no">
-<meta property="og:type" content="article">
-<meta property="og:title" content="在Hexo推送博客期间出现的问题与解决方案">
-<meta property="og:url" content="http://srezone.github.io/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
-<meta property="og:site_name" content="SREZONE">
-<meta property="og:description" content="本博客所有文章采用的授权方式为  自由转载-非商用-非衍生-保持署名  ，转载时请务必注明出处，谢谢！！！ 郑重声明：本篇文章欢迎转发，但请保留原作者信息！ 博客：srezone； 微信公众号：开源小馆； 文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！  问题背景近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错： 123456789101112131415[no">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png">
-<meta property="og:image" content="https://img.imgdb.cn/item/6051a018524f85ce298e6583.png">
-<meta property="article:published_time" content="2021-03-17T06:36:22.000Z">
-<meta property="article:modified_time" content="2021-04-21T02:19:14.823Z">
-<meta property="article:author" content="Richard Lee">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Git">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png">
-
-<link rel="canonical" href="http://srezone.github.io/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <title>在Hexo推送博客期间出现的问题与解决方案 | SREZONE</title>
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<link  rel="stylesheet" href="/css/main.css" />
 
-</head>
+<!-- 自定义样式保持在最底部 -->
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SREZONE</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">SREZONE</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-  </ul>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="在Hexo推送博客期间出现的问题与解决方案">
+              
+            </span>
 
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-17 14:36" pubdate>
+        2021年3月17日 下午
+      </time>
+    </span>
+  
+</div>
 
+<div class="mt-1">
+  
     
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      828 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://srezone.github.io/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Richard Lee">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SREZONE">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          在Hexo推送博客期间出现的问题与解决方案
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-17 14:36:22" itemprop="dateCreated datePublished" datetime="2021-03-17T14:36:22+08:00">2021-03-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-21 10:19:14" itemprop="dateModified" datetime="2021-04-21T10:19:14+08:00">2021-04-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">博客运维</span></a>
-                </span>
-            </span>
+            
+          </div>
 
           
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <hr>
-<p>本博客所有文章采用的授权方式为  <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">自由转载-非商用-非衍生-保持署名</a>  ，转载时请务必注明出处，谢谢！！！</p>
-<p><strong>郑重声明：</strong>本篇文章欢迎转发，但请保留原作者信息！</p>
-<p>博客：<a target="_blank" rel="noopener" href="https://srezone.open-space.cc/">srezone</a>；</p>
-<p>微信公众号：开源小馆；</p>
-<p>文章内容系本人学习、研究后总结整理，如有雷同，实属荣幸！</p>
-<hr>
-<h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line">[master 595037e] Site updated: 2021-03-17 11:54:50</span><br><span class="line"> 1 file changed, 1 insertion(+), 1 deletion(-)</span><br><span class="line">fatal: unable to access &#x27;https://github.com/srezone/srezone.github.io.git/&#x27;: Encountered end of file</span><br><span class="line">FATAL &#123; err:</span><br><span class="line">   &#123; Error: Spawn failed</span><br><span class="line">       at ChildProcess.task.on.code (/home/noone/WorkSpace/blog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">       at ChildProcess.emit (events.js:198:13)</span><br><span class="line">       at Process.ChildProcess._handle.onexit (internal/child_process.js:248:12) code: 128 &#125; &#125; &#x27;Something\&#x27;s wrong. Maybe you can find the solution here: %s&#x27; &#x27;\u001b[4mhttps://hexo.io/docs/troubleshooting.html\u001b[24m&#x27;</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">在Hexo推送博客期间出现的问题与解决方案</h1>
+            
+            <div class="markdown-body">
+              <h3 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h3><p>近期使用Hexo部署网站到Github远端仓库的时候，经常会出现如下报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[noone@open-source blog]$ hexo d<br>INFO  Validating config<br>INFO  Deploying: git<br>INFO  Clearing .deploy_git folder...<br>INFO  Copying files from public folder...<br>INFO  Copying files from extend dirs...<br>[master 595037e] Site updated: 2021-03-17 11:54:50<br> 1 file changed, 1 insertion(+), 1 deletion(-)<br>fatal: unable to access &#x27;https://github.com/srezone/srezone.github.io.git/&#x27;: Encountered end of file<br>FATAL &#123; err:<br>   &#123; Error: Spawn failed<br>       at ChildProcess.task.on.code (/home/noone/WorkSpace/blog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)<br>       at ChildProcess.emit (events.js:198:13)<br>       at Process.ChildProcess._handle.onexit (internal/child_process.js:248:12) code: 128 &#125; &#125; &#x27;Something\&#x27;s wrong. Maybe you can find the solution here: %s&#x27; &#x27;\u001b[4mhttps://hexo.io/docs/troubleshooting.html\u001b[24m&#x27;<br>[noone@open-source blog]$<br></code></pre></div></td></tr></table></figure>
+
 <h3 id="根因定位"><a href="#根因定位" class="headerlink" title="根因定位"></a>根因定位</h3><p>几经搜索尝试，无果，恰好前段时间收到一封Github的邮件，告知如下：</p>
-<p><img src="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png" alt="Github弃用密码访问博客仓库的通知"></p>
+<p><img src="https://img.imgdb.cn/item/60519be5524f85ce298bea98.png" srcset="/img/loading.gif" lazyload alt="Github弃用密码访问博客仓库的通知"></p>
 <p>OK，基本了解报错的根因：Github的问题，而不是我这边仓库不一致导致提交冲突等乱七八糟的原因。</p>
 <p>接下来的思路是，配置Hexo使用密钥认证方式完成Git提交：</p>
-<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source ~]$ ssh-keygen -t rsa -b 4096 -C &quot;noone@open-source.cc&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/noone/.ssh/id_rsa): </span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /home/noone/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /home/noone/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Z***1/cn********************u/L*****9 noone@open-source.cc</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|                 |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|=. . .           |</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">|  o+o... o o. o =|</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">[noone@open-source ~]$ cd .ssh/</span><br><span class="line">[noone@open-source .ssh]$ ll</span><br><span class="line">total 12</span><br><span class="line">-rw------- 1 noone noone 3243 Mar 17 13:33 id_rsa</span><br><span class="line">-rw-r--r-- 1 noone noone  746 Mar 17 13:33 id_rsa.pub</span><br><span class="line">-rw-r--r-- 1 noone noone 1049 Mar 15 22:11 known_hosts</span><br></pre></td></tr></table></figure>
+<h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><h4 id="生成密钥"><a href="#生成密钥" class="headerlink" title="生成密钥"></a>生成密钥</h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[noone@open-source ~]$ ssh-keygen -t rsa -b 4096 -C &quot;noone@open-source.cc&quot;<br>Generating public/private rsa key pair.<br>Enter file in which to save the key (/home/noone/.ssh/id_rsa): <br>Enter passphrase (empty for no passphrase): <br>Enter same passphrase again: <br>Your identification has been saved in /home/noone/.ssh/id_rsa.<br>Your public key has been saved in /home/noone/.ssh/id_rsa.pub.<br>The key fingerprint is:<br>SHA256:Z***1/cn********************u/L*****9 noone@open-source.cc<br>The key&#x27;s randomart image is:<br>+---[RSA 4096]----+<br>|                 |<br>|=. . .           |<br>|=. . .           |<br>|=. . .           |<br>|=. . .           |<br>|=. . .           |<br>|=. . .           |<br>|  o+o... o o. o =|<br>|  o+o... o o. o =|<br>+----[SHA256]-----+<br>[noone@open-source ~]$ cd .ssh/<br>[noone@open-source .ssh]$ ll<br>total 12<br>-rw------- 1 noone noone 3243 Mar 17 13:33 id_rsa<br>-rw-r--r-- 1 noone noone  746 Mar 17 13:33 id_rsa.pub<br>-rw-r--r-- 1 noone noone 1049 Mar 15 22:11 known_hosts<br></code></pre></div></td></tr></table></figure>
+
 <h4 id="配置Github使用密钥认证"><a href="#配置Github使用密钥认证" class="headerlink" title="配置Github使用密钥认证"></a>配置Github使用密钥认证</h4><p>妥善保存私钥文件（id_rsa），将公钥文件（id_rsa.pub）内容复制，粘贴到Github对应的页面中，完成GitHub端的具体配置：</p>
-<p><img src="https://img.imgdb.cn/item/6051a018524f85ce298e6583.png" alt="Github设置密钥登录的配置界面"></p>
+<p><img src="https://img.imgdb.cn/item/6051a018524f85ce298e6583.png" srcset="/img/loading.gif" lazyload alt="Github设置密钥登录的配置界面"></p>
 <p>验证密钥配置是否生效，如果配置成功会返回具体提示，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source .ssh]$ ssh -T git@github.com</span><br><span class="line">The authenticity of host &#x27;github.com (13.250.777.333)&#x27; can&#x27;t be established.</span><br><span class="line">RSA key fingerprint is SHA256:n******************************************.</span><br><span class="line">RSA key fingerprint is MD5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com,13.250.777.333&#x27; (RSA) to the list of known hosts.</span><br><span class="line">Hi srezone! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">[noone@open-source .ssh]$</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[noone@open-source .ssh]$ ssh -T git@github.com<br>The authenticity of host &#x27;github.com (13.250.777.333)&#x27; can&#x27;t be established.<br>RSA key fingerprint is SHA256:n******************************************.<br>RSA key fingerprint is MD5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5:16:27:ac:a5.<br>Are you sure you want to continue connecting (yes/no)? yes<br>Warning: Permanently added &#x27;github.com,13.250.777.333&#x27; (RSA) to the list of known hosts.<br>Hi srezone! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.<br>[noone@open-source .ssh]$<br></code></pre></div></td></tr></table></figure>
+
 <h4 id="配置Hexo使用SSH密钥认证方式"><a href="#配置Hexo使用SSH密钥认证方式" class="headerlink" title="配置Hexo使用SSH密钥认证方式"></a>配置Hexo使用SSH密钥认证方式</h4><p>修改Hexo站点根目录下的配置文件，在deploy字段将相关配置行修改为SSH格式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ vim _config.yml</span><br><span class="line">......</span><br><span class="line"><span class="meta">#</span><span class="bash"> Deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Docs: https://hexo.io/docs/one-command-deployment</span></span></span><br><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line"><span class="meta">#</span><span class="bash">  repository: https://github.com/srezone/srezone.github.io.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 删除上面这行，上面的URL是用于HTTPS连接，使用用户名密码登录</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 修改为下面这行的格式，用户名和仓库名使用自己的替换即可</span></span></span><br><span class="line">   repository: git@github.com:srezone/srezone.github.io.git</span><br><span class="line">   branch: main</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[noone@open-source blog]$ vim _config.yml<br>......<br><span class="hljs-meta">#</span><span class="bash"> Deployment</span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># Docs: https://hexo.io/docs/one-command-deployment</span></span><br>deploy:<br>   type: git<br><span class="hljs-meta">#</span><span class="bash">  repository: https://github.com/srezone/srezone.github.io.git</span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 删除上面这行，上面的URL是用于HTTPS连接，使用用户名密码登录</span></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment"># 修改为下面这行的格式，用户名和仓库名使用自己的替换即可</span></span><br>   repository: git@github.com:srezone/srezone.github.io.git<br>   branch: main<br>......<br></code></pre></div></td></tr></table></figure>
+
 <p>重新部署，没有问题，且没有了输入用户名和密码的环节，显得非常流畅顺滑：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[noone@open-source blog]$ hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 329 ms</span><br><span class="line">INFO  0 files generated in 383 ms</span><br><span class="line">[noone@open-source blog]$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">INFO  Copying files from extend dirs...</span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line">nothing to commit, working directory clean</span><br><span class="line">Branch master set up to track remote branch main from git@github.com:srezone/srezone.github.io.git.</span><br><span class="line">Everything up-to-date</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line">[noone@open-source blog]$</span><br></pre></td></tr></table></figure>
-    </div>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[noone@open-source blog]$ hexo g<br>INFO  Validating config<br>INFO  Start processing<br>INFO  Files loaded in 329 ms<br>INFO  0 files generated in 383 ms<br>[noone@open-source blog]$ hexo d<br>INFO  Validating config<br>INFO  Deploying: git<br>INFO  Clearing .deploy_git folder...<br>INFO  Copying files from public folder...<br>INFO  Copying files from extend dirs...<br><span class="hljs-meta">#</span><span class="bash"> On branch master</span><br>nothing to commit, working directory clean<br>Branch master set up to track remote branch main from git@github.com:srezone/srezone.github.io.git.<br>Everything up-to-date<br>INFO  Deploy done: git<br>[noone@open-source blog]$<br></code></pre></div></td></tr></table></figure>
 
-    
-    
-    
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E7%BB%B4/">博客运维</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Privoxy在Ubuntu 18中的安装与配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/">
+                        <span class="hidden-mobile">Facebook F4 两级Clos网络架构-纯图</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
-              <a href="/tags/Git/" rel="tag"># Git</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" rel="prev" title="Facebook F4 两级Clos网络架构-纯图">
-      <i class="fa fa-chevron-left"></i> Facebook F4 两级Clos网络架构-纯图
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" rel="next" title="Privoxy在Ubuntu 18中的安装与配置">
-      Privoxy在Ubuntu 18中的安装与配置 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            
+          </article>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E5%9B%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">根因定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">解决步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="nav-number">3.1.</span> <span class="nav-text">生成密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEGithub%E4%BD%BF%E7%94%A8%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81"><span class="nav-number">3.2.</span> <span class="nav-text">配置Github使用密钥认证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEHexo%E4%BD%BF%E7%94%A8SSH%E5%AF%86%E9%92%A5%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">配置Hexo使用SSH密钥认证方式</span></a></li></ol></li></ol></div>
       </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Richard Lee</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/srezone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;srezone" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:noone@open-source.cc" title="E-Mail → mailto:noone@open-source.cc" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Richard Lee</span>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-        
-
-
-
-
-
-
-
-
       </div>
-    </footer>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
   </div>
 
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
 
   
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>
