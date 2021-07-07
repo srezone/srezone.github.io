@@ -18,7 +18,7 @@
   <meta name="author" content="Richard Lee">
   <meta name="keywords" content="">
   
-  <title>Privoxy在Ubuntu 18中的安装与配置 - SREZONE</title>
+  <title>在Ubuntu 18上安装配置代理软件 - SREZONE</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Privoxy在Ubuntu 18中的安装与配置">
+            <span class="h2" id="subtitle" title="在Ubuntu 18上安装配置代理软件">
               
             </span>
 
@@ -237,7 +237,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Privoxy在Ubuntu 18中的安装与配置</h1>
+            <h1 style="display: none">在Ubuntu 18上安装配置代理软件</h1>
             
             <div class="markdown-body">
               <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
@@ -281,7 +281,7 @@
                     
                       <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
                     
-                      <a class="hover-with-bg" href="/tags/Privoxy/">Privoxy</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6/">代理软件</a>
                     
                   </div>
                 
@@ -298,7 +298,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/">
+                      <a href="/article/2080221565.html">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">使用7年的笔记本保养升级</span>
                         <span class="visible-mobile">上一篇</span>
@@ -308,7 +308,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                      <a href="/article/1517646518.html">
                         <span class="hidden-mobile">在Hexo推送博客期间出现的问题与解决方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

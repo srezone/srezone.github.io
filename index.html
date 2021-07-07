@@ -40,7 +40,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -194,13 +194,50 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/" target="_self">
+        <a href="/article/2279620328.html" target="_self">
+          使用rsync实现生产数据的增量备份
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/article/2279620328.html" target="_self">
+          
+          
+            
+          
+          0x01 使用实例利用rsync完成增量备份的脚本：
+1234567891011121314[root@yunwei-beifen beifen]# cat beifen-tool/rsync-100-20-**-**.sh#!/bin/bashexecute_id=`uuidgen`log_file=&quot;/nfsc/pocdev_vol_000094/beifen-data/100-20
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-07 11:19" pubdate>
+              2021-07-07
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/article/657609840.html" target="_self">
           王垠-如何掌握所有的程序语言
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/" target="_self">
+        <a href="/article/657609840.html" target="_self">
           
           
             
@@ -244,13 +281,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" target="_self">
+        <a href="/article/2080221565.html" target="_self">
           使用7年的笔记本保养升级
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/04/05/%E4%BD%BF%E7%94%A87%E5%B9%B4%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BF%9D%E5%85%BB%E5%8D%87%E7%BA%A7/" target="_self">
+        <a href="/article/2080221565.html" target="_self">
           
           
             
@@ -288,13 +325,13 @@ DISK 240G固态+120G固态+1T机械
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
-          Privoxy在Ubuntu 18中的安装与配置
+        <a href="/article/3466813046.html" target="_self">
+          在Ubuntu 18上安装配置代理软件
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+        <a href="/article/3466813046.html" target="_self">
           
           
             
@@ -328,7 +365,7 @@ DISK 240G固态+120G固态+1T机械
             
               <a href="/tags/Ubuntu/">Ubuntu</a>
             
-              <a href="/tags/Privoxy/">Privoxy</a>
+              <a href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6/">代理软件</a>
             
           </div>
         
@@ -342,13 +379,13 @@ DISK 240G固态+120G固态+1T机械
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+        <a href="/article/1517646518.html" target="_self">
           在Hexo推送博客期间出现的问题与解决方案
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/17/%E5%9C%A8Hexo%E6%8E%A8%E9%80%81%E5%8D%9A%E5%AE%A2%E6%9C%9F%E9%97%B4%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+        <a href="/article/1517646518.html" target="_self">
           
           
             
@@ -395,13 +432,13 @@ DISK 240G固态+120G固态+1T机械
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" target="_self">
+        <a href="/article/1394958544.html" target="_self">
           Facebook F4 两级Clos网络架构-纯图
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/08/Facebook-F4-%E4%B8%A4%E7%BA%A7Clos%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84-%E7%BA%AF%E5%9B%BE/" target="_self">
+        <a href="/article/1394958544.html" target="_self">
           
           
             
@@ -446,13 +483,13 @@ DISK 240G固态+120G固态+1T机械
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_self">
+        <a href="/article/93640367.html" target="_self">
           Hexo 快速入门
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/01/22/Hexo-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_self">
+        <a href="/article/93640367.html" target="_self">
           
           
             

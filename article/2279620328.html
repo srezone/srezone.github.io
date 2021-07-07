@@ -18,7 +18,7 @@
   <meta name="author" content="Richard Lee">
   <meta name="keywords" content="">
   
-  <title>使用7年的笔记本保养升级 - SREZONE</title>
+  <title>使用rsync实现生产数据的增量备份 - SREZONE</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"srezone.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="使用7年的笔记本保养升级">
+            <span class="h2" id="subtitle" title="使用rsync实现生产数据的增量备份">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-05 14:54" pubdate>
-        2021年4月5日 下午
+      <time datetime="2021-07-07 11:19" pubdate>
+        2021年7月7日 上午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      618 字
+      593 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -237,42 +237,67 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用7年的笔记本保养升级</h1>
+            <h1 style="display: none">使用rsync实现生产数据的增量备份</h1>
             
             <div class="markdown-body">
-              <h3 id="2021-01-10"><a href="#2021-01-10" class="headerlink" title="2021-01-10"></a>2021-01-10</h3><p>2014年高考结束购入的战神K660ED4已经不堪重负，经过六年服役早已伤痕累累，期间升级了屏幕、硬盘、内存、散热等，到目前机器配置如下：</p>
-<ul>
-<li>CPU i7 4700HQ</li>
-<li>GPU GTX860M</li>
-<li>MEM 24GB</li>
-<li>DISK 240G固态+120G固态+1T机械</li>
-<li>三块硬盘用于：系统盘、软件盘、资料盘</li>
-</ul>
-<p>目前，老战神存在的问题是：操作系统方面已连轴转了接近4年，软件和数据逐渐膨胀，已经占用了90%空间，导致固态和机械硬盘掉速严重；触控板按键被异物卡死；开机键断裂，容易误触关机；摄像头无法使用，怀疑是排线问题；散热拉垮，轻负载待机温度高达90度，开机即起飞，移动鼠标都能引起风扇狂转。</p>
-<p>于是，周末简单清灰、检查散热情况后，决定开始翻新升级老战神，暂定包括电脑C面、网卡、检修摄像头、更换全新的散热模组、改装水冷、维修触摸板等。</p>
-<p>动手前的拍照留念：</p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64eff5.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64efea.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddbc.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab3438322e6675c64efef.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddb7.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab3308322e6675c64ddb5.jpg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-01-11"><a href="#2021-01-11" class="headerlink" title="2021-01-11"></a>2021-01-11</h3><p>彻底拆解完毕，开始思考是否换全套外壳，彻彻底底翻新机器外观，裸板如下图，不知道是不是因为日久生情，总觉得板子是如此的漂亮。</p>
-<p><img src="https://img.imgdb.cn/item/606abda78322e6675c7101ef.jpg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-01-13"><a href="#2021-01-13" class="headerlink" title="2021-01-13"></a>2021-01-13</h3><p>笔记本外壳，键盘压条缺货，完美主义作祟，放弃原汁原味复刻翻新，开始搞DIY！测试老散热器的散热铜管导热情况，使用开水加手摸，哈哈哈哈……</p>
-<p><img src="https://img.imgdb.cn/item/606ab8e28322e6675c6bc8a4.jpg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-01-20"><a href="#2021-01-20" class="headerlink" title="2021-01-20"></a>2021-01-20</h3><p>不带壳组装好，检测各个零部件以及排线经过拆解是否完好。结果，操他大爷的，吃外卖过程中打翻汤汁，无奈之下开始水洗主板。</p>
-<p><img src="https://img.imgdb.cn/item/606abae58322e6675c6e1e3a.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606ab7f68322e6675c6ad3fc.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-02-26"><a href="#2021-02-26" class="headerlink" title="2021-02-26"></a>2021-02-26</h3><p>水洗主板前用酒精清理，无法开机，主板部分芯片发烫，于是水洗后用暖气片烤干，结果仍无法开机。惊喜的是经过一个年假的阴干静置后竟然好了，成功点亮！</p>
-<p><img src="https://img.imgdb.cn/item/606abb5d8322e6675c6e9eb8.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-03-02"><a href="#2021-03-02" class="headerlink" title="2021-03-02"></a>2021-03-02</h3><p>散热改装完毕，开始烤机测试！</p>
-<p><img src="https://img.imgdb.cn/item/606abb958322e6675c6ed9ba.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2021-04-05"><a href="#2021-04-05" class="headerlink" title="2021-04-05"></a>2021-04-05</h3><p>和老同学闹情绪了，所以，原计划自己设计的亚克力机箱的图纸暂时没法继续画了，以后再说吧，裸板用也没啥大问题，奉上成品图（暂时过渡）！</p>
-<p><img src="https://img.imgdb.cn/item/606abd358322e6675c7085c2.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://img.imgdb.cn/item/606abd358322e6675c7085c0.jpg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="费用小结"><a href="#费用小结" class="headerlink" title="费用小结"></a>费用小结</h3><p><img src="https://img.imgdb.cn/item/606abc3e8322e6675c6f8cb0.png" srcset="/img/loading.gif" lazyload></p>
-<p>暂且告一段落，后面亚克力机箱加工完毕后，再来更新……</p>
+              <h3 id="0x01-使用实例"><a href="#0x01-使用实例" class="headerlink" title="0x01 使用实例"></a>0x01 使用实例</h3><p>利用rsync完成增量备份的脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# cat beifen-tool/rsync-100-20-**-**.sh<br><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><br><br>execute_id=`uuidgen`<br><br>log_file=&quot;/nfsc/pocdev_vol_000094/beifen-data/100-20-**-**-log.d/`date &#x27;+%Y%m%d&#x27;`-execute.log&quot;<br><br>echo &#x27;Rsync script started time is :&#x27; `date` $execute_id &gt;&gt; $log_file<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash">删除DST端中在SRC已经删除或者不存在的目录，同时排除LOG目录，以降低备份服务器硬盘空间的占用</span><br>rsync -azuv --exclude-from=&#x27;./rsync-100-20-**-**-Exclude.list&#x27; --bwlimit=1024 --delete --delete-after --progress root@100.20.**.**:/home/admin /root/beifen/beifen-data/100-20-**-** &gt;&gt; $log_file<br><br>echo &#x27;Rsync script finished time is :&#x27; `date` $execute_id &gt;&gt; $log_file<br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
+
+<p>日志目录排除清单：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# cat beifen-tool/rsync-100-20-**-**-Exclude.list <br>www/data/administrator/logs<br>...<br>atlassian/******/logs<br>...<br>.jenkins/logs<br>...<br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
+
+<p>定时任务设置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# crontab -l<br>30 02 * * * /bin/bash /nfsc/pocdev_vol_000094/beifen-tool/rsync-101-89-80-141.sh <br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
+
+<p>上述的脚本和定时任务配置，达到的效果是：在每天的凌晨两点半，开始比较备份服务器与生产服务器的数据（排除无用且数据量较大的日志），并按照对比的结果，将生产服务器昨日新产生的数据同步到备份服务器中，将生产服务器中已经删除的文件也在备份服务器中删除掉，以保证两端数据完全相同，同时输出同步日志到备份服务器相应的目录。备份机是私有云中的一台虚拟机，备份数据会写入到私有云中的NAS存储，备份脚本与日志也都保存在NAS存储中。</p>
+<h3 id="0x02-参数解释"><a href="#0x02-参数解释" class="headerlink" title="0x02 参数解释"></a>0x02 参数解释</h3><p>这里只简要解释脚本中使用到的rsync参数：</p>
+<blockquote>
+<p>rsync -azuv SRC/ DST/ ：把SRC目录中的文件，同步到DST目录中。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>保留被同步文件的所有元数据，并递归</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>传输文件时进行压缩以节省带宽</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>跳过目标目录中更新的文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>输出同步的细节</td>
+</tr>
+<tr>
+<td>–exclude-from=’./rsync-100-20-**-**-Exclude.list’</td>
+<td>从指定文件中读取需要排除的目录、文件</td>
+</tr>
+<tr>
+<td>–bwlimit=1024</td>
+<td>限速传输，单位为KB/s</td>
+</tr>
+<tr>
+<td>–delete</td>
+<td>删除目标目录比源目录多余的文件</td>
+</tr>
+<tr>
+<td>–delete-after</td>
+<td>定义–delete动作的执行时机，即在所有文件传输完成后开始删除</td>
+</tr>
+<tr>
+<td>–progress</td>
+<td>在传输过程中显示进度</td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
@@ -293,18 +318,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/14/%E7%8E%8B%E5%9E%A0-%E5%A6%82%E4%BD%95%E6%8E%8C%E6%8F%A1%E6%89%80%E6%9C%89%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">王垠-如何掌握所有的程序语言</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/24/Privoxy%E5%9C%A8Ubuntu-18%E4%B8%AD%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-                        <span class="hidden-mobile">Privoxy在Ubuntu 18中的安装与配置</span>
+                      <a href="/article/657609840.html">
+                        <span class="hidden-mobile">王垠-如何掌握所有的程序语言</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
