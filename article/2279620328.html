@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      593 字
+      591 字
     </span>
   
 
@@ -247,7 +247,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# cat beifen-tool/rsync-100-20-**-**-Exclude.list <br>www/data/administrator/logs<br>...<br>atlassian/******/logs<br>...<br>.jenkins/logs<br>...<br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
 
 <p>定时任务设置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# crontab -l<br>30 02 * * * /bin/bash /nfsc/pocdev_vol_000094/beifen-tool/rsync-101-89-80-141.sh <br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@yunwei-beifen beifen]# crontab -l<br>30 02 * * * /bin/bash /nfsc/pocdev_vol_000094/beifen-tool/rsync-100-20-**-**.sh <br>[root@yunwei-beifen beifen]# <br></code></pre></div></td></tr></table></figure>
 
 <p>上述的脚本和定时任务配置，达到的效果是：在每天的凌晨两点半，开始比较备份服务器与生产服务器的数据（排除无用且数据量较大的日志），并按照对比的结果，将生产服务器昨日新产生的数据同步到备份服务器中，将生产服务器中已经删除的文件也在备份服务器中删除掉，以保证两端数据完全相同，同时输出同步日志到备份服务器相应的目录。备份机是私有云中的一台虚拟机，备份数据会写入到私有云中的NAS存储，备份脚本与日志也都保存在NAS存储中。</p>
 <h3 id="0x02-参数解释"><a href="#0x02-参数解释" class="headerlink" title="0x02 参数解释"></a>0x02 参数解释</h3><p>这里只简要解释脚本中使用到的rsync参数：</p>
