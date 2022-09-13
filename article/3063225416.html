@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="本文将以流水账的形式，记录如何一点点地部署一个3节点的 K8S 集群">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  <meta name="description" content="本文将以流水账的形式，记录如何一点点地部署一个3节点的 K8S 集群">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署有3个节点的 K8S 集群">
+<meta property="og:url" content="https://srezone.open-space.cc/article/3063225416.html">
+<meta property="og:site_name" content="SREZONE">
+<meta property="og:description" content="本文将以流水账的形式，记录如何一点点地部署一个3节点的 K8S 集群">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-09T10:18:18.000Z">
+<meta property="article:modified_time" content="2021-12-08T10:16:19.000Z">
+<meta property="article:author" content="Richard Lee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>部署有3个节点的 K8S 集群 - SREZONE</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.open-space.cc","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":125,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="SREZONE" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SREZONE</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="部署有3个节点的 K8S 集群">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-09 18:18" pubdate>
+        2021年11月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      13k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">部署有3个节点的 K8S 集群</h1>
+            
+            <div class="markdown-body">
+              <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>此系列的议题是：研究容器集群网络，以及硬件加速的可行性。</p>
+<p>我无意把这个系列写成从入门到精通这类教程，除非觉得有必要，否则不会对涉及到的基础知识（命令行、容器基础、VxLan网络等知识点）进行阐述，而是打算写一个学习研究过程的日记，供日后温习回忆参考。</p>
+<p>本文是此系列的第一期，主要流水账式的部署教程，关于如何部署一个3个节点的K8S集群，网络插件选用的是flannel。本文的所有操作均基于<a href="https://srezone.open-space.cc/">这篇文章</a>继续进行的，进行部署操作前务必阅读前文。另外，本文的0x01~5章节只贴出了节点1上的操作关键步骤，但是这些步骤在3个节点上都需要做！</p>
+<h3 id="0x01-升级系统内核版本"><a href="#0x01-升级系统内核版本" class="headerlink" title="0x01 升级系统内核版本"></a>0x01 升级系统内核版本</h3><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 查看当前内核版本</span>
+[root@node-01 ~]# uname -r
+3.10.0-1160.42.2.el7.x86_64
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 配置ELRepo源</span>
+[root@node-01 ~]# rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+[root@node-01 ~]# yum install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 查看源仓，长期维护内核版本为5.4，因此更新到5.4版本的内核</span>
+[root@node-01 ~]# yum --enablerepo=elrepo-kernel list kernel-lt*
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 安装新版内核时出现软件报冲突的错误，根据提示删除老版（3.10.0）的软件包</span>
+[root@node-01 ~]# yum remove kernel-tools kernel-tools-libs
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 尝试重新安装，一切顺利</span>
+[root@node-01 ~]# yum --enablerepo=elrepo-kernel install kernel-lt*
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 设置新装内核为系统默认启动内核</span>
+[root@node-01 ~]# cat /boot/grub2/grub.cfg | grep menuentry
+[root@node-01 ~]# grub2-set-default &#x27;Red Hat Enterprise Linux Server (5.4.152-1.el7.elrepo.x86_64) 7.9 (Maipo)&#x27;
+[root@node-01 ~]# grub2-editenv list
+saved_entry=Red Hat Enterprise Linux Server (5.4.152-1.el7.elrepo.x86_64) 7.9 (Maipo)
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 重启以使用最新版内核</span>
+[root@node-01 ~]# reboot
+[root@node-01 ~]# uname -r
+5.4.152-1.el7.elrepo.x86_64</code></pre></div>
+
+
+
+<h3 id="0x02-开启IPVS支持"><a href="#0x02-开启IPVS支持" class="headerlink" title="0x02 开启IPVS支持"></a>0x02 开启IPVS支持</h3><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 准备开启IPVS的脚本</span>
+[root@node-01 ~]# cat /etc/sysconfig/modules/ipvs.modules 
+<span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+ipvs_modules=&quot;ip_vs ip_vs_lc ip_vs_wlc ip_vs_rr ip_vs_wrr ip_vs_lblc ip_vs_lblcr ip_vs_dh ip_vs_sh ip_vs_fo ip_vs_nq ip_vs_sed ip_vs_ftp nf_conntrack&quot;
+for kernel_module in $&#123;ipvs_modules&#125;; do
+  /sbin/modinfo -F filename $&#123;kernel_module&#125; &gt; /dev/null 2&gt;&amp;1
+  if [ $? -eq 0 ]; then
+    /sbin/modprobe $&#123;kernel_module&#125;
+  fi
+done
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 运行并检查结果</span>
+[root@node-01 ~]# chmod +x /etc/sysconfig/modules/ipvs.modules 
+[root@node-01 ~]# bash /etc/sysconfig/modules/ipvs.modules 
+[root@node-01 ~]# lsmod | grep ip_vs
+ip_vs_ftp              16384  0 
+nf_nat                 40960  1 ip_vs_ftp
+ip_vs_sed              16384  0 
+ip_vs_nq               16384  0 
+ip_vs_fo               16384  0 
+ip_vs_sh               16384  0 
+ip_vs_dh               16384  0 
+ip_vs_lblcr            16384  0 
+ip_vs_lblc             16384  0 
+ip_vs_wrr              16384  0 
+ip_vs_rr               16384  0 
+ip_vs_wlc              16384  0 
+ip_vs_lc               16384  0 
+ip_vs                 155648  24 ip_vs_wlc,ip_vs_rr,ip_vs_dh,ip_vs_lblcr,ip_vs_sh,ip_vs_fo,ip_vs_nq,ip_vs_lblc,ip_vs_wrr,ip_vs_lc,ip_vs_sed,ip_vs_ftp
+nf_conntrack          147456  2 nf_nat,ip_vs
+nf_defrag_ipv6         24576  2 nf_conntrack,ip_vs
+libcrc32c              16384  4 nf_conntrack,nf_nat,xfs,ip_vs</code></pre></div>
+
+
+
+<h3 id="0x03-禁用交换分区，启用内核转发"><a href="#0x03-禁用交换分区，启用内核转发" class="headerlink" title="0x03 禁用交换分区，启用内核转发"></a>0x03 禁用交换分区，启用内核转发</h3><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 禁用交换分区</span>
+[root@node-01 ~]# swapoff -a
+[root@node-01 ~]# vim /etc/fstab 
+[root@node-01 ~]# cat /etc/fstab 
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment"># /etc/fstab</span></span>
+<span class="hljs-meta">#</span><span class="bash"> Created by anaconda on Tue Oct 12 15:34:19 2021</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment"># Accessible filesystems, by reference, are maintained under &#x27;/dev/disk&#x27;</span></span>
+<span class="hljs-meta">#</span><span class="bash"> See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) <span class="hljs-keyword">for</span> more info</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">/dev/mapper/rhel-root   /                       xfs     defaults        0 0</span>
+UUID=6c16024f-882a-43f3-9144-0ef8cdfc1f80 /boot                   xfs     defaults        0 0
+/dev/mapper/rhel-home   /home                   xfs     defaults        0 0
+<span class="hljs-meta">#</span><span class="bash">/dev/mapper/rhel-swap   swap                    swap    defaults        0 0</span>
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 启用内核转发</span>
+[root@node-01 ~]# vim /etc/sysctl.conf 
+[root@node-01 ~]# cat /etc/sysctl.conf 
+<span class="hljs-meta">#</span><span class="bash"> sysctl settings are defined through files <span class="hljs-keyword">in</span></span>
+<span class="hljs-meta">#</span><span class="bash"> /usr/lib/sysctl.d/, /run/sysctl.d/, and /etc/sysctl.d/.</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment"># Vendors settings live in /usr/lib/sysctl.d/.</span></span>
+<span class="hljs-meta">#</span><span class="bash"> To override a whole file, create a new file with the same <span class="hljs-keyword">in</span></span>
+<span class="hljs-meta">#</span><span class="bash"> /etc/sysctl.d/ and put new settings there. To override</span>
+<span class="hljs-meta">#</span><span class="bash"> only specific settings, add a file with a lexically later</span>
+<span class="hljs-meta">#</span><span class="bash"> name <span class="hljs-keyword">in</span> /etc/sysctl.d/ and put new settings there.</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment"># For more information, see sysctl.conf(5) and sysctl.d(5).</span></span>
+
+vm.swappiness = 0
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+[root@node-01 ~]# sysctl -a | grep vm.swappiness
+sysctl: reading key &quot;net.ipv6.conf.all.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.default.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.ens192.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.lo.stable_secret&quot;
+vm.swappiness = 30
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 使设置生效并进行检查</span>
+[root@node-01 ~]# sysctl -p
+vm.swappiness = 0
+sysctl: cannot stat /proc/sys/net/bridge/bridge-nf-call-iptables: No such file or directory
+net.ipv4.ip_forward = 1
+sysctl: cannot stat /proc/sys/net/bridge/bridge-nf-call-ip6tables: No such file or directory
+[root@node-01 ~]# sysctl -a | grep vm.swappiness
+sysctl: reading key &quot;net.ipv6.conf.all.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.default.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.ens192.stable_secret&quot;
+sysctl: reading key &quot;net.ipv6.conf.lo.stable_secret&quot;
+vm.swappiness = 0</code></pre></div>
+
+
+
+<h3 id="0x04-安装并配置Docker容器环境"><a href="#0x04-安装并配置Docker容器环境" class="headerlink" title="0x04 安装并配置Docker容器环境"></a>0x04 安装并配置Docker容器环境</h3><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 安装Docker社区版软件</span>
+[root@node-01 ~]# yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+[root@node-01 ~]# sed -i &#x27;s+download.docker.com+mirrors.aliyun.com/docker-ce+&#x27; /etc/yum.repos.d/docker-ce.repo
+[root@node-01 ~]# sed -i &#x27;s/\$releasever/7/g&#x27; /etc/yum.repos.d/docker-ce.repo 
+[root@node-01 ~]# sed -i &#x27;s/\$basearch/x86_64/g&#x27; /etc/yum.repos.d/docker-ce.repo 
+[root@node-01 ~]# yum makecache fast
+[root@node-01 ~]# yum -y install docker-ce
+[root@node-01 ~]# systemctl enable docker
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+[root@node-01 ~]# systemctl restart docker
+[root@node-01 ~]# docker version
+Client: Docker Engine - Community
+ Version:           20.10.9
+ API version:       1.41
+ Go version:        go1.16.8
+ Git commit:        c2ea9bc
+ Built:             Mon Oct  4 16:08:14 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.9
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.16.8
+  Git commit:       79ea9d3
+  Built:            Mon Oct  4 16:06:37 2021
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.4.11
+  GitCommit:        5b46e404f6b9f661a205e28d59c982d3634148f8
+ runc:
+  Version:          1.0.2
+  GitCommit:        v1.0.2-0-g52b36a2
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 使用阿里云的镜像加速器</span>
+<span class="hljs-meta">#</span><span class="bash"> 指定Docker的cgroupdriver为systemd，否则与kubelet不一致会导致k8s初始化失败，kubelet的服务启动出错</span>
+[root@node-01 ~]# mkdir -p /etc/docker
+[root@node-01 ~]# tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;
+&#123;
+  &quot;registry-mirrors&quot;: [&quot;https://******.mirror.aliyuncs.com&quot;],
+  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;]
+&#125;
+EOF
+[root@node-01 ~]# systemctl daemon-reload
+[root@node-01 ~]# systemctl restart docker
+[root@node-01 ~]# docker info
+Client:
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  app: Docker App (Docker Inc., v0.9.1-beta3)
+  buildx: Build with BuildKit (Docker Inc., v0.6.3-docker)
+  scan: Docker Scan (Docker Inc., v0.8.0)
+
+Server:
+ Containers: 17
+  Running: 16
+  Paused: 0
+  Stopped: 1
+ Images: 12
+ Server Version: 20.10.9
+ Storage Driver: overlay2
+  Backing Filesystem: xfs
+  Supports d_type: true
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 1
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc io.containerd.runc.v2 io.containerd.runtime.v1.linux
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 5b46e404f6b9f661a205e28d59c982d3634148f8
+ runc version: v1.0.2-0-g52b36a2
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: 5.4.152-1.el7.elrepo.x86_64
+ Operating System: Red Hat Enterprise Linux Server 7.9 (Maipo)
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 8
+ Total Memory: 7.776GiB
+ Name: node-01.open-source.cc
+ ID: OVI7:CEM3:66VC:TIYE:LCJU:TILS:UTEA:OTDW:C3CA:22VS:FLK5:OOKJ
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Registry Mirrors:
+  https://******.mirror.aliyuncs.com/
+ Live Restore Enabled: false</code></pre></div>
+
+
+
+<h3 id="0x05-安装K8S软件包"><a href="#0x05-安装K8S软件包" class="headerlink" title="0x05 安装K8S软件包"></a>0x05 安装K8S软件包</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">[root@node-01 ~]# cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+[root@node-01 ~]# yum install -y kubelet kubeadm kubectl
+[root@node-01 ~]# systemctl enable kubelet 
+[root@node-01 ~]# systemctl restart kubelet</code></pre></div>
+
+
+
+<h3 id="0x06-K8S集群的初始化与配置"><a href="#0x06-K8S集群的初始化与配置" class="headerlink" title="0x06 K8S集群的初始化与配置"></a>0x06 K8S集群的初始化与配置</h3><p>前面5个小节罗列的是其中一个节点的操作步骤，但需要在集群中的3个节点都执行，此小节会列出3个节点上的全部操作步骤。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 导出默认的初始化配置，定制修改kubeadm初始化文件</span>
+[root@node-01 ~]# kubeadm config print init-defaults
+apiVersion: kubeadm.k8s.io/v1beta3
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 1.2.3.4
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  imagePullPolicy: IfNotPresent
+  name: node
+  taints: null
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta3
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: &#123;&#125;
+dns: &#123;&#125;
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: k8s.gcr.io
+kind: ClusterConfiguration
+kubernetesVersion: 1.22.0
+networking:
+  dnsDomain: cluster.local
+  serviceSubnet: 10.96.0.0/12
+scheduler: &#123;&#125;
+[root@node-01 ~]# kubeadm config print init-defaults &gt; kubeadm.yaml
+<span class="hljs-meta">#</span><span class="bash"> 修改后的配置文件内容</span>
+[root@node-01 ~]# cat kubeadm.yaml 
+apiVersion: kubeadm.k8s.io/v1beta3
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: sresre.0123456789012345
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 192.168.4.101
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  imagePullPolicy: IfNotPresent
+  name: node-01.open-source.cc
+  taints: null
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta3
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: &#123;&#125;
+dns: &#123;&#125;
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: k8s.gcr.io
+kind: ClusterConfiguration
+kubernetesVersion: 1.22.0
+networking:
+  dnsDomain: cluster.local
+  serviceSubnet: 10.96.0.0/12
+  podSubnet: 10.244.0.0/16
+scheduler: &#123;&#125;
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 使用kubeadm与准备好的初始化配置文件，进行集群master节点初始化</span>
+[root@node-01 ~]# kubeadm init --config=kubeadm.yaml
+[init] Using Kubernetes version: v1.22.0
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using &#x27;kubeadm config images pull&#x27;
+
+......
+<span class="hljs-meta">#</span><span class="bash"> 省略</span>
+......
+
+[kubelet-finalize] Updating &quot;/etc/kubernetes/kubelet.conf&quot; to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.4.101:6443 --token sresre.0123456789012345 \
+    --discovery-token-ca-cert-hash sha256:6a747449922a0132067b66989debf321a3a49e0a00a705891e34dc06eb1636e2 
+[root@node-01 ~]# mkdir -p $HOME/.kube
+[root@node-01 ~]# cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+[root@node-01 ~]# chown $(id -u):$(id -g) $HOME/.kube/config
+[root@node-01 ~]# ll -h .kube/
+total 8.0K
+-rw------- 1 root root 5.6K Oct 14 09:38 config
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 部署flannel网络插件</span>
+[root@node-01 ~]# wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+[root@node-01 ~]# kubectl apply -f kube-flannel.yml
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 在节点2侧执行加入集群的命令</span>
+[root@node-02 ~]# kubeadm join 192.168.4.101:6443 --token sresre.0123456789012345 \
+<span class="hljs-meta">&gt;</span><span class="bash"> --discovery-token-ca-cert-hash sha256:6a747449922a0132067b66989debf321a3a49e0a00a705891e34dc06eb1636e2</span>
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with &#x27;kubectl -n kube-system get cm kubeadm-config -o yaml&#x27;
+[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;
+[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run &#x27;kubectl get nodes&#x27; on the control-plane to see this node join the cluster.
+
+[root@node-02 ~]# mkdir -p $HOME/.kube
+[root@node-02 ~]# scp root@node-01:/etc/kubernetes/admin.conf $HOME/.kube/config
+[root@node-02 ~]# chown $(id -u):$(id -g) $HOME/.kube/config
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 在节点3侧执行加入集群的命令</span>
+[root@node-03 ~]# kubeadm join 192.168.4.101:6443 --token sresre.0123456789012345 \
+<span class="hljs-meta">&gt;</span><span class="bash"> --discovery-token-ca-cert-hash sha256:6a747449922a0132067b66989debf321a3a49e0a00a705891e34dc06eb1636e2</span>
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with &#x27;kubectl -n kube-system get cm kubeadm-config -o yaml&#x27;
+[kubelet-start] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;
+[kubelet-start] Writing kubelet environment file with flags to file &quot;/var/lib/kubelet/kubeadm-flags.env&quot;
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run &#x27;kubectl get nodes&#x27; on the control-plane to see this node join the cluster.
+
+[root@node-03 ~]# mkdir -p $HOME/.kube
+[root@node-03 ~]# scp root@node-01:/etc/kubernetes/admin.conf $HOME/.kube/config
+[root@node-03 ~]# chown $(id -u):$(id -g) $HOME/.kube/config
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 在节点1侧检查集群状态，一切正常，部署完毕</span>
+[root@node-01 ~]# kubectl get nodes
+NAME                     STATUS   ROLES                  AGE     VERSION
+node-01.open-source.cc   Ready    control-plane,master   10m     v1.22.2
+node-02.open-source.cc   Ready    &lt;none&gt;                 9m21s   v1.22.2
+node-03.open-source.cc   Ready    &lt;none&gt;                 8m53s   v1.22.2
+<span class="hljs-meta"></span>
+<span class="hljs-meta">#</span><span class="bash"> 为集群内的3个节点配置命令行补全功能</span>
+[root@node-01 ~]# echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc
+[root@node-02 ~]# echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc
+[root@node-03 ~]# echo &quot;source &lt;(kubectl completion bash)&quot; &gt;&gt; ~/.bashrc</code></pre></div>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Kubernetes/">Kubernetes</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/article/4022561966.html">
+                        <span class="hidden-mobile">个人实验环境的基础配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

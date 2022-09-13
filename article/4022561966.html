@@ -1,0 +1,661 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="为了更好地进行后续的学习与实验，要从零到一攒出一个属于自己的实验环境">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  <meta name="description" content="为了更好地进行后续的学习与实验，要从零到一攒出一个属于自己的实验环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人实验环境的基础配置">
+<meta property="og:url" content="https://srezone.open-space.cc/article/4022561966.html">
+<meta property="og:site_name" content="SREZONE">
+<meta property="og:description" content="为了更好地进行后续的学习与实验，要从零到一攒出一个属于自己的实验环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-09T10:18:02.000Z">
+<meta property="article:modified_time" content="2021-11-09T10:31:01.000Z">
+<meta property="article:author" content="Richard Lee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>个人实验环境的基础配置 - SREZONE</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.open-space.cc","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":125,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="SREZONE" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SREZONE</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="个人实验环境的基础配置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-09 18:18" pubdate>
+        2021年11月9日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">个人实验环境的基础配置</h1>
+            
+            <div class="markdown-body">
+              <h3 id="操作系统与实验环境介绍"><a href="#操作系统与实验环境介绍" class="headerlink" title="操作系统与实验环境介绍"></a>操作系统与实验环境介绍</h3><p>实验环境中共3台虚拟机，处于网段192.168.4.0/24中，此网段能够访问互联网。在安装完操作系统后，会及时对这3台虚拟机拍摄快照并附上清晰的备注信息，在之后的实验中，会根据需要频繁拍摄快照以便回退。在下一个章节会简要介绍我是如何进行系统环境初始化的，操作步骤以node-01为例，其他2台虚拟机的操作同理，不再赘述。</p>
+<p><strong>虚拟机配置：</strong></p>
+<p>CPU：单槽8个虚拟核心</p>
+<p>内存：8G</p>
+<p>硬盘：200G 精简置备</p>
+<p><strong>虚拟机操作系统版本：</strong>RHEL-Server-7.9-x86_64</p>
+<p><strong>虚拟机网络地址分配：</strong></p>
+<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>node-01.open-source.cc</td>
+<td>192.168.4.101</td>
+</tr>
+<tr>
+<td>node-02.open-source.cc</td>
+<td>192.168.4.102</td>
+</tr>
+<tr>
+<td>node-03.open-source.cc</td>
+<td>192.168.4.103</td>
+</tr>
+</tbody></table>
+<h3 id="初始化实验环境中的三个节点"><a href="#初始化实验环境中的三个节点" class="headerlink" title="初始化实验环境中的三个节点"></a>初始化实验环境中的三个节点</h3><p><strong>网络相关配置</strong></p>
+<p>安装完新系统后，首先进行网络相关的配置，以保证各节点网络正常，且可以通过主机名通信。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 配置网卡IP、DNS、HostName</span>
+[root@node-01 ~]# cd /etc/sysconfig/network-scripts/
+[root@node-01 network-scripts]# vim ifcfg-ens192 
+[root@node-01 network-scripts]# cat ifcfg-ens192 
+NAME=ens192
+TYPE=Ethernet
+DEVICE=ens192
+BOOTPROTO=static
+DEFROUTE=yes
+ONBOOT=yes
+IPADDR=192.168.4.101
+NETMASK=255.255.255.0
+GATEWAY=192.168.4.1
+DNS1=223.5.5.5
+DNS2=223.6.6.6
+[root@node-01 network-scripts]# systemctl restart network
+[root@node-01 network-scripts]# ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens192: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:0c:29:71:9f:1e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.4.101/24 brd 192.168.4.255 scope global noprefixroute ens192
+       valid_lft forever preferred_lft forever
+    inet6 fe80::20c:29ff:fe71:9f1e/64 scope link 
+       valid_lft forever preferred_lft forever
+[root@node-01 network-scripts]# cd
+[root@node-01 ~]# ping baidu.com -c 2
+PING baidu.com (220.181.38.251) 56(84) bytes of data.
+64 bytes from 220.181.38.251 (220.181.38.251): icmp_seq=1 ttl=50 time=6.04 ms
+64 bytes from 220.181.38.251 (220.181.38.251): icmp_seq=2 ttl=50 time=6.07 ms
+
+--- baidu.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 6.043/6.058/6.073/0.015 ms
+<span class="hljs-meta">#</span><span class="bash"> hostname在安装系统过程中通过图形化界面已经配置了，命令行方式可使用</span>
+[root@node-01 ~]# hostnamectl set-hostname ***^C
+[root@node-01 ~]# hostname
+node-01.open-source.cc
+<span class="hljs-meta">#</span><span class="bash"> 配置环境的hosts，使得各节点可以通过主机名互访</span>
+[root@node-01 ~]# vim /etc/hosts
+[root@node-01 ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.4.101 node-01 node-01.open-source.cc
+192.168.4.102 node-02 node-02.open-source.cc
+192.168.4.103 node-03 node-03.open-source.cc
+[root@node-01 ~]# ping node-01 -c 2
+PING node-01 (192.168.4.101) 56(84) bytes of data.
+64 bytes from node-01 (192.168.4.101): icmp_seq=1 ttl=64 time=0.023 ms
+64 bytes from node-01 (192.168.4.101): icmp_seq=2 ttl=64 time=0.040 ms
+
+--- node-01 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 999ms
+rtt min/avg/max/mdev = 0.023/0.031/0.040/0.010 ms
+[root@node-01 ~]# ping node-01.open-source.cc -c 2
+PING node-01 (192.168.4.101) 56(84) bytes of data.
+64 bytes from node-01 (192.168.4.101): icmp_seq=1 ttl=64 time=0.021 ms
+64 bytes from node-01 (192.168.4.101): icmp_seq=2 ttl=64 time=0.061 ms
+
+--- node-01 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 999ms
+rtt min/avg/max/mdev = 0.021/0.041/0.061/0.020 ms</code></pre></div>
+
+
+
+<p><strong>安全相关配置</strong></p>
+<p>为了减少各类实验期间系统安全机制带来的干扰，这里提前关闭掉他们，如果非常熟悉或感兴趣，也可保持打开状态，后续再根据环境要求去配置即可。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 通过修改配置文件，永久地关闭selinux</span>
+[root@node-01 ~]# vim /etc/sysconfig/selinux
+[root@node-01 ~]# cat /etc/sysconfig/selinux
+<span class="hljs-meta">#</span><span class="bash"> This file controls the state of SELinux on the system.</span>
+<span class="hljs-meta">#</span><span class="bash"> SELINUX= can take one of these three values:</span>
+<span class="hljs-meta">#</span><span class="bash">     enforcing - SELinux security policy is enforced.</span>
+<span class="hljs-meta">#</span><span class="bash">     permissive - SELinux prints warnings instead of enforcing.</span>
+<span class="hljs-meta">#</span><span class="bash">     disabled - No SELinux policy is loaded.</span>
+SELINUX=disabled
+<span class="hljs-meta">#</span><span class="bash"> SELINUXTYPE= can take one of three values:</span>
+<span class="hljs-meta">#</span><span class="bash">     targeted - Targeted processes are protected,</span>
+<span class="hljs-meta">#</span><span class="bash">     minimum - Modification of targeted policy. Only selected processes are protected.</span> 
+<span class="hljs-meta">#</span><span class="bash">     mls - Multi Level Security protection.</span>
+SELINUXTYPE=targeted 
+[root@node-01 ~]# getenforce 
+Enforcing
+[root@node-01 ~]# setenforce 0
+<span class="hljs-meta">#</span><span class="bash"> 永久地关闭firewalld</span>
+[root@node-01 ~]# systemctl disable firewalld
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[root@node-01 ~]# systemctl stop firewalld</code></pre></div>
+
+
+
+<p><strong>软件源相关配置</strong></p>
+<p>使用国内源不但访问速度更快，还能减少安装或更新软件时出现timeout错误的几率，这里选择阿里家的，同样的国内镜像站点还有网易、清华等。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 检查系统已有源仓，可以看到新系统中默认没有任何源仓</span>
+[root@node-01 ~]# cd /etc/yum.repos.d/
+[root@node-01 yum.repos.d]# ll
+total 0
+<span class="hljs-meta">#</span><span class="bash"> 配置阿里的国内镜像源仓，国内访问速度更快，减少安装或更新软件时出现timeout错误的几率</span>
+[root@node-01 yum.repos.d]# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+[root@node-01 yum.repos.d]# ll
+total 4
+-rw-r--r--. 1 root root 2523 Dec 26  2020 CentOS-Base.repo
+<span class="hljs-meta">#</span><span class="bash"> 替换预留字段<span class="hljs-variable">$releasever</span>为7，因为使用的系统发行版为RHEL7</span>
+[root@node-01 yum.repos.d]# sed -i &#x27;s/\$releasever/7/g&#x27; CentOS-Base.repo
+<span class="hljs-meta">#</span><span class="bash"> 使用阿里源更新系统软件，初次更新估计耗时比较久</span>
+[root@node-01 yum.repos.d]# yum update</code></pre></div>
+
+<p>更多源仓的国内镜像，以及配置使用方法，请参考阿里源的官方网站：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/%E3%80%82">https://developer.aliyun.com/mirror/。</a></p>
+<p><strong>安装常用的软件</strong></p>
+<p>首先我常使用的一些软件，暂时没想起来别的，就先装了tree和screen，软件功能与使用方式自行了解不再赘述。</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">[root@node-01 yum.repos.d]# yum install -y tree screen</code></pre></div>
+
+
+
+<p><strong>重启确认各项配置仍有效</strong></p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">[root@node-01 ~]# getenforce 
+Disabled
+[root@node-01 ~]# systemctl status firewalld
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
+   Active: inactive (dead)
+     Docs: man:firewalld(1)
+[root@node-01 ~]# ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens192: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 00:0c:29:71:9f:1e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.4.101/24 brd 192.168.4.255 scope global noprefixroute ens192
+       valid_lft forever preferred_lft forever
+    inet6 fe80::20c:29ff:fe71:9f1e/64 scope link 
+       valid_lft forever preferred_lft forever
+[root@node-01 ~]# cat /etc/resolv.conf
+<span class="hljs-meta">#</span><span class="bash"> Generated by NetworkManager</span>
+search open-source.cc
+nameserver 223.5.5.5
+nameserver 223.6.6.6
+[root@node-01 ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.4.101 node-01 node-01.open-source.cc
+192.168.4.102 node-02 node-02.open-source.cc
+192.168.4.103 node-03 node-03.open-source.cc
+[root@node-01 ~]#</code></pre></div>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Kubernetes/">Kubernetes</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/article/3063225416.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">部署有3个节点的 K8S 集群</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/article/1882097394.html">
+                        <span class="hidden-mobile">OpenStack 社区已正式发布第24个大版本-Xena</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,623 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="使用本软件的初衷是想要解决 Linux 终端下 HTTPS 流量的代理问题">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  <meta name="description" content="使用本软件的初衷是想要解决 Linux 终端下 HTTPS 流量的代理问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Ubuntu 18 上安装配置代理软件">
+<meta property="og:url" content="https://srezone.open-space.cc/article/3466813046.html">
+<meta property="og:site_name" content="SREZONE">
+<meta property="og:description" content="使用本软件的初衷是想要解决 Linux 终端下 HTTPS 流量的代理问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/60e41c595132923bf84159dd.png">
+<meta property="article:published_time" content="2021-03-24T01:53:41.000Z">
+<meta property="article:modified_time" content="2021-11-09T10:12:50.000Z">
+<meta property="article:author" content="Richard Lee">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="代理软件">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/60e41c595132923bf84159dd.png">
+  
+  <title>在 Ubuntu 18 上安装配置代理软件 - SREZONE</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.open-space.cc","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":125,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="SREZONE" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SREZONE</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="在 Ubuntu 18 上安装配置代理软件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-24 09:53" pubdate>
+        2021年3月24日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">在 Ubuntu 18 上安装配置代理软件</h1>
+            
+            <div class="markdown-body">
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>使用本软件的初衷是想要解决Linux终端下HTTPS代理的问题，以保证OpenStack-Helm项目在部署期间，所需要的Docker镜像可以顺利拉取下来。目前，常用的各大代理软件少有支持HTTPS，但基本都支持SOCKS5协议，所以在应用的广泛程度上不是那么理想。例如：各移动终端、PS5之类的游戏设备都没有支持SOCKS5协议，相比而言HTTPS的代理模式被广泛支持。本文介绍的Privoxy软件就是作为代理链条上的中间层，配合Linux终端环境变量，用来将终端命令工具行产生的HTTPS、HTTP、FTP流量转为SOCKS5流量，最终再交给代理软件处理转发。</p>
+<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><p>局域网中代理服务器端的IP地址：192.168.0.60（不在本文讨论范围内）</p>
+<p>客户端操作系统：Ubuntu 18.04</p>
+<p>客户端IP地址：192.168.2.233</p>
+<p>系统APT源列表：</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ cat /etc/apt/sources.list
+deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse</code></pre></div>
+
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo apt-get install privoxy</code></pre></div>
+
+<h3 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h3><h4 id="编辑代理软件的配置文件"><a href="#编辑代理软件的配置文件" class="headerlink" title="编辑代理软件的配置文件"></a>编辑代理软件的配置文件</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo vim /etc/privoxy/config
+......
+<span class="hljs-meta">#</span><span class="bash">      注释：在此处配置软件监听使用的端口号，默认使用本机的8118端口，用来接收本机转发过来的流量</span>
+<span class="hljs-meta">#</span><span class="bash">      Suppose you are running Privoxy on an IPv6-capable machine and</span>
+<span class="hljs-meta">#</span><span class="bash">      you want it to listen on the IPv6 address of the loopback</span>
+<span class="hljs-meta">#</span><span class="bash">      device:</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#        listen-address [::1]:8118</span></span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">listen-address  127.0.0.1:8118</span>
+listen-address  [::1]:8118
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">......</span>
+<span class="hljs-meta">#</span><span class="bash">      注释：此处的配置，是将本地转发到8118端口的流量，转发到192.168.0.60:10808，此接口是局域网中代理软件提供的</span>
+<span class="hljs-meta">#</span><span class="bash">      To chain Privoxy and Tor, both running on the same system, you</span>
+<span class="hljs-meta">#</span><span class="bash">      would use something like:</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#        forward-socks5t   /               127.0.0.1:9050 .</span></span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">forward-socks5 / 192.168.0.60:10808 .</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#      注释：此处按格式填写不想让软件进行转发代理的网段，一般情况多为本地局域网的网段</span></span>
+<span class="hljs-meta">#</span><span class="bash">      Note that <span class="hljs-keyword">if</span> you got Tor through one of the bundles, you may</span>
+<span class="hljs-meta">#</span><span class="bash">      have to change the port from 9050 to 9150 (or even another</span>
+<span class="hljs-meta">#</span><span class="bash">      one). For details, please check the documentation on the Tor</span>
+<span class="hljs-meta">#</span><span class="bash">      website.</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#      The public Tor network can&#x27;t be used to reach your local</span></span>
+<span class="hljs-meta">#</span><span class="bash">      network, <span class="hljs-keyword">if</span> you need to access <span class="hljs-built_in">local</span> servers you therefore</span>
+<span class="hljs-meta">#</span><span class="bash">      might want to make some exceptions:</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#        forward         192.168.*.*/     .</span></span>
+<span class="hljs-meta">#</span><span class="bash">        forward            10.*.*.*/     .</span>
+<span class="hljs-meta">#</span><span class="bash">        forward           127.*.*.*/     .</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">forward         192.168.*.*/     .</span>
+forward            10.*.*.*/     .
+forward           127.*.*.*/     .
+forward           172.24.*.*/    .
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">......</span>
+<span class="hljs-meta">#</span><span class="bash">  注释：若网络不稳定，建议开启软件的转发重试功能</span>
+<span class="hljs-meta">#</span><span class="bash">  Examples:</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash"><span class="hljs-comment">#      forwarded-connect-retries 1</span></span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">forwarded-connect-retries  1</span>
+<span class="hljs-meta">#</span><span class="bash"></span>
+<span class="bash">......</span></code></pre></div>
+
+<h4 id="重启软件并设置为自启动"><a href="#重启软件并设置为自启动" class="headerlink" title="重启软件并设置为自启动"></a>重启软件并设置为自启动</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ sudo systemctl restart privoxy
+noone@noone-virtual-machine:~$ sudo systemctl enable privoxy
+noone@noone-virtual-machine:~$ sudo systemctl status privoxy
+● privoxy.service - Privacy enhancing HTTP Proxy
+   Loaded: loaded (/lib/systemd/system/privoxy.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2021-03-24 06:29:00 CST; 3h 49min ago
+     Docs: man:privoxy(8)
+           https://www.privoxy.org/user-manual/
+ Main PID: 26737 (privoxy)
+    Tasks: 1 (limit: 4915)
+   CGroup: /system.slice/privoxy.service
+           └─26737 /usr/sbin/privoxy --pidfile /var/run/privoxy.pid --user privoxy /etc/privoxy/config
+
+3月 24 06:28:59 noone-virtual-machine systemd[1]: Starting Privacy enhancing HTTP Proxy...
+3月 24 06:29:00 noone-virtual-machine systemd[1]: Started Privacy enhancing HTTP Proxy.</code></pre></div>
+
+<h4 id="编辑系统的环境变量"><a href="#编辑系统的环境变量" class="headerlink" title="编辑系统的环境变量"></a>编辑系统的环境变量</h4><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:~$ vim ~/.bashrc
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">enable</span> programmable completion features (you don<span class="hljs-string">&#x27;t need to enable</span></span>
+<span class="hljs-meta">#</span><span class="bash"><span class="hljs-string"> this, if it&#x27;</span>s already enabled <span class="hljs-keyword">in</span> /etc/bash.bashrc and /etc/profile</span>
+<span class="hljs-meta">#</span><span class="bash"> sources /etc/bash.bashrc).</span>
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+<span class="hljs-meta">#</span><span class="bash"> 注释：在.bashrc文件末尾追加如下配置，使得命令行工具产生的流量转发给Privoxy软件进行处理</span>
+export ftp_proxy=&quot;127.0.0.1:8118&quot;
+export http_proxy=&quot;127.0.0.1:8118&quot;
+export https_proxy=&quot;127.0.0.1:8118&quot;
+export no_proxy=&quot;localhost,127.0.0.1,10.0.0.0/8,172.16.0.0/12,172.24.0.0/12,192.168.0.0/16,172.17.0.1,.svc.cluster.local&quot;</code></pre></div>
+
+<h3 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">noone@noone-virtual-machine:/tmp$ wget www.google.com
+--2021-03-24 10:21:45--  http://www.google.com/
+Connecting to 127.0.0.1:8118... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 12823 (13K) [text/html]
+Saving to: ‘index.html’
+
+index.html                                                          100%[=====&gt;]  12.52K  --.-KB/s    in 0s      
+
+2021-03-24 10:21:47 (187 MB/s) - ‘index.html’ saved [12823/12823]
+
+noone@noone-virtual-machine:/tmp$ wget www.youtube.com
+URL transformed to HTTPS due to an HSTS policy
+--2021-03-24 10:23:09--  https://www.youtube.com/
+Connecting to 127.0.0.1:8118... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html.1’
+
+index.html.1                                                        100%[=====&gt;] 564.69K  90.4KB/s    in 14s     
+
+2021-03-24 10:23:25 (41.1 KB/s) - ‘index.html.1’ saved [578247]
+
+noone@noone-virtual-machine:/tmp$</code></pre></div>
+
+<p>在局域网中，用于提供最终代理服务的服务器是：192.168.0.60，在监听192.168.0.60:10808端口来接受SOCKS5协议的流量。</p>
+<p><img src="https://pic.imgdb.cn/item/60e41c595132923bf84159dd.png" srcset="/img/loading.gif" lazyload alt="局域网代理软件v2rayN的转发日志"></p>
+<p>观察日志，可以确认使用了Privoxy的Ubuntu已经成功将Linux终端命令行产生的流量转发给代理服务器处理了。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/OpenStack-Helm/">OpenStack-Helm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6/">代理软件</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/article/2080221565.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用7年的笔记本保养升级</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/article/1517646518.html">
+                        <span class="hidden-mobile">在 Hexo 推送博客期间出现的问题与解决方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

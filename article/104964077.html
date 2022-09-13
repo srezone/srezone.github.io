@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <link rel="icon" href="https://pic.imgdb.cn/item/60e3ed2e5132923bf8fc1266.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记录在 Ubuntu16.04 中安装 Mellanox 网卡的驱动程序">
+  <meta name="author" content="Richard Lee">
+  <meta name="keywords" content="">
+  <meta name="description" content="记录在 Ubuntu16.04 中安装 Mellanox 网卡的驱动程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16.04 安装 ConnectX-4 Lx 网卡驱动">
+<meta property="og:url" content="https://srezone.open-space.cc/article/104964077.html">
+<meta property="og:site_name" content="SREZONE">
+<meta property="og:description" content="记录在 Ubuntu16.04 中安装 Mellanox 网卡的驱动程序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/6114c7555132923bf892024b.png">
+<meta property="article:published_time" content="2021-08-16T05:46:22.000Z">
+<meta property="article:modified_time" content="2021-10-08T03:58:52.000Z">
+<meta property="article:author" content="Richard Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/6114c7555132923bf892024b.png">
+  
+  <title>Ubuntu16.04 安装 ConnectX-4 Lx 网卡驱动 - SREZONE</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/rainbow.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"srezone.open-space.cc","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":125,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"91fcc4ca54e6ce41505bb5ff4d59cf0b","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="SREZONE" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SREZONE</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Ubuntu16.04 安装 ConnectX-4 Lx 网卡驱动">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-16 13:46" pubdate>
+        2021年8月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      16k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      50 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Ubuntu16.04 安装 ConnectX-4 Lx 网卡驱动</h1>
+            
+            <div class="markdown-body">
+              <h3 id="0x00-下载并解压缩-Mellanox-网卡的驱动"><a href="#0x00-下载并解压缩-Mellanox-网卡的驱动" class="headerlink" title="0x00 下载并解压缩 Mellanox 网卡的驱动"></a>0x00 下载并解压缩 Mellanox 网卡的驱动</h3><p><img src="https://pic.imgdb.cn/item/6114c7555132923bf892024b.png" srcset="/img/loading.gif" lazyload alt="在 Mellanox 官网下载当前操作系统对应版本驱动"></p>
+<p>首先，需要到 Mellanox 官网下载当前操作系统对应版本驱动。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://www.mellanox.com/products/infiniband-drivers/linux/mlnx_ofed">https://www.mellanox.com/products/infiniband-drivers/linux/mlnx_ofed</a></p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">root@Super-Server:~# tar xvf MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64.tgz
+root@Super-Server:~# ll
+total 832296
+drwx------ 26 root root      4096 8月  12 11:51 ./
+drwxr-xr-x 24 root root      4096 7月  13 18:17 ../
+drwxr-xr-x  5 root root      4096 7月   3 11:10 MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64/
+-rw-r--r--  1 root root 330339588 8月  12 11:51 MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64.tgz
+root@Super-Server:~# cd MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64/
+root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64# ll
+total 300
+drwxr-xr-x  5 root root   4096 7月   3 11:10 ./
+drwx------ 26 root root   4096 8月  12 11:51 ../
+-rw-r--r--  1 root root      7 7月   3 11:09 .arch
+-rwxr-xr-x  1 root root   3077 7月   3 11:09 common_installers.pl*
+-rwxr-xr-x  1 root root  20656 7月   3 11:09 common.pl*
+-rwxr-xr-x  1 root root  24396 7月   3 11:09 create_mlnx_ofed_installers.pl*
+drwxr-xr-x  2 root root  12288 7月   3 11:11 DEBS/
+-rw-r--r--  1 root root     12 7月   3 11:09 distro
+drwxr-xr-x  6 root root   4096 7月   3 11:09 docs/
+-rw-r--r--  1 root root    956 7月   3 11:09 LICENSE
+-rw-r--r--  1 root root     12 7月   3 11:09 .mlnx
+-rwxr-xr-x  1 root root  20727 7月   3 11:09 mlnx_add_kernel_support.sh*
+-rwxr-xr-x  1 root root 165777 7月   3 11:09 mlnxofedinstall*
+-rw-r--r--  1 root root   2764 7月   3 11:10 RPM-GPG-KEY-Mellanox
+drwxr-xr-x  2 root root   4096 7月   3 11:09 src/
+-rwxr-xr-x  1 root root  12200 7月   3 11:09 uninstall.sh*
+root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64#</code></pre></div>
+
+<h3 id="0x01-生成适配当前系统的驱动包"><a href="#0x01-生成适配当前系统的驱动包" class="headerlink" title="0x01 生成适配当前系统的驱动包"></a>0x01 生成适配当前系统的驱动包</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64# ./mlnx_add_kernel_support.sh -m /root/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64 -v
+Using provided distro: ubuntu16.04
+Note: This program will create MLNX_OFED_LINUX TGZ for ubuntu16.04 under /tmp directory.
+Do you want to continue?[y/N]:y
+See log file /tmp/mlnx_iso.503_logs/mlnx_ofed_iso.503.log
+
+Detected MLNX_OFED_LINUX-5.4-1.0.3.0
+Running /bin/rm -rf /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext
+Running cp -a /root/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64 /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext
+Checking if all needed packages are installed...
+Running tar xzf /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/src/MLNX_OFED_SRC-5.4-1.0.3.0.tgz
+Building MLNX_OFED_LINUX DEBS . Please wait...
+Running MLNX_OFED_SRC-5.4-1.0.3.0/install.pl --tmpdir /tmp/mlnx_iso.503_logs --kernel-only --kernel 4.15.0-142-generic --kernel-sources /lib/modules/4.15.0-142-generic/build/ --builddir /tmp/mlnx_iso.503 --without-dkms --build-only
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/iser-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/isert-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/mlnx-nfsrdma-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/mlnx-ofed-kernel-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/kernel-mft-modules_4.17.0-106.kver.4.15.0-142-generic_all.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/mlnx-ofed-kernel-utils_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/mlnx-nvme-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/knem_1.1.4.90mlnx1-OFED.5.1.2.5.0.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/srp-modules_5.4-OFED.5.4.1.0.3.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Running install -m 0644 MLNX_OFED_SRC-5.4-1.0.3.0/DEBS/ubuntu16.04/x86_64/knem-modules_1.1.4.90mlnx1-OFED.5.1.2.5.0.1.kver.4.15.0-142-generic_amd64.deb /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS
+Creating metadata-rpms for 4.15.0-142-generic ...
+Running /usr/bin/perl /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/create_mlnx_ofed_installers.pl --with-hpc --upstream-libs --tmpdir /tmp/mlnx_iso.503_logs --mofed /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext --rpms-tdir /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/DEBS --output /tmp/mlnx_iso.503/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext --debian --kernel 4.15.0-142-generic --ignore-groups eth-only
+Running apt-ftparchive packages . &gt; Packages
+Running bzip2 -kf Packages
+Running apt-ftparchive release . &gt; Release
+Running apt-ftparchive packages . &gt; Packages
+Running bzip2 -kf Packages
+Running apt-ftparchive release . &gt; Release
+WARNING: If you are going to configure this package as a repository, then please note
+WARNING: that it is not signed, therefore, you need to set &#x27;trusted=yes&#x27; in the sources.list file.
+WARNING: Example: deb [trusted=yes] file:/&lt;path to MLNX_OFED DEBS folder&gt; ./
+Running tar czf /tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext.tgz MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext
+Created /tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext.tgz
+root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64# cd /tmp
+root@Super-Server:/tmp# tar xvf MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext.tgz
+root@Super-Server:/tmp# ll
+total 327568
+drwxrwxrwt 13 root root     86016 8月  12 13:39 ./
+drwxr-xr-x 24 root root      4096 7月  13 18:17 ../
+drwxr-xr-x  5 root root      4096 7月   3 11:10 MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/
+-rw-r--r--  1 root root 335246877 8月  12 12:15 MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext.tgz
+root@Super-Server:/tmp#</code></pre></div>
+
+<p>驱动包生成工具的使用帮助文档：</p>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">root@Super-Server:/tmp# cd /root/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64/
+root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64# ./mlnx_add_kernel_support.sh --help 
+
+	Usage: mlnx_add_kernel_support.sh -m|--mlnx_ofed &lt;path to MLNX_OFED/mlnx-en directory&gt; [--make-iso|--make-tgz]
+
+		[--make-iso]                    			Create MLNX_OFED/mlnx-en ISO image.
+		[--make-tgz]                    			Create MLNX_OFED/mlnx-en tarball. (Default)
+		[-t|--tmpdir &lt;temp work dir&gt;]                           Temp work directory (Default: /tmp)
+		
+		[-k | --kernel]	&lt;kernel version&gt;			Kernel version to use.
+		[-s | --kernel-sources] &lt;path to the kernel sources&gt;	Path to kernel headers.
+		[--ofed-sources] &lt;path to tgz&gt;				Path to OFED sources tgz package.
+		[-v|--verbose]
+		[-n|--name]						Name of the package to be created.
+		[-y|--yes]						Answer &quot;yes&quot; to all questions
+		[--force]						Force removing packages that depends on MLNX_OFED/mlnx-en
+		[--skip-repo]						Do not create a repository from MLNX_OFED/mlnx-en rpms.
+		[--without-&lt;package&gt;]					Do not build/install given package (or module).
+		
+
+root@Super-Server:~/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64# cd /tmp
+root@Super-Server:/tmp#</code></pre></div>
+
+<h3 id="0x02-安装驱动"><a href="#0x02-安装驱动" class="headerlink" title="0x02 安装驱动"></a>0x02 安装驱动</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">root@Super-Server:/tmp# cd MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext/
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# ll
+total 388
+drwxr-xr-x  5 root root   4096 7月   3 11:10 ./
+drwxrwxrwt 13 root root  86016 8月  12 14:09 ../
+-rw-r--r--  1 root root      7 7月   3 11:09 .arch
+-rwxr-xr-x  1 root root   3077 7月   3 11:09 common_installers.pl*
+-rwxr-xr-x  1 root root  20656 7月   3 11:09 common.pl*
+-rwxr-xr-x  1 root root  24396 7月   3 11:09 create_mlnx_ofed_installers.pl*
+drwxr-xr-x  2 root root  16384 8月  12 12:15 DEBS/
+-rw-r--r--  1 root root     12 7月   3 11:09 distro
+drwxr-xr-x  6 root root   4096 7月   3 11:09 docs/
+-rw-r--r--  1 root root    956 7月   3 11:09 LICENSE
+-rw-r--r--  1 root root     12 7月   3 11:09 .mlnx
+-rwxr-xr-x  1 root root  20727 7月   3 11:09 mlnx_add_kernel_support.sh*
+-rwxr-xr-x  1 root root 165777 7月   3 11:09 mlnxofedinstall*
+-rw-r--r--  1 root root   2764 7月   3 11:10 RPM-GPG-KEY-Mellanox
+drwxr-xr-x  2 root root   4096 7月   3 11:09 src/
+-rwxr-xr-x  1 root root  12200 7月   3 11:09 uninstall.sh*
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# ./mlnxofedinstall 
+Logs dir: /tmp/MLNX_OFED_LINUX.6015.logs
+General log file: /tmp/MLNX_OFED_LINUX.6015.logs/general.log
+
+Below is the list of MLNX_OFED_LINUX packages that you have chosen
+(some may have been added by the installer due to package dependencies):
+
+ofed-scripts
+mlnx-tools
+mlnx-ofed-kernel-utils
+mlnx-ofed-kernel-modules
+iser-modules
+isert-modules
+srp-modules
+rdma-core
+libibverbs1
+ibverbs-utils
+ibverbs-providers
+libibverbs-dev
+libibverbs1-dbg
+libibumad3
+libibumad-dev
+ibacm
+librdmacm1
+rdmacm-utils
+librdmacm-dev
+mstflint
+ibdump
+libibmad5
+libibmad-dev
+libopensm
+opensm
+opensm-doc
+libopensm-devel
+libibnetdisc5
+infiniband-diags
+mft
+kernel-mft-modules
+perftest
+ibutils2
+ar-mgr
+dump-pr
+ibsim
+ibsim-doc
+ucx
+sharp
+hcoll
+openmpi
+mpitests
+knem-modules
+libdapl2
+dapl2-utils
+libdapl-dev
+dpcp
+srptools
+mlnx-ethtool
+mlnx-iproute2
+rshim
+neohost-backend
+neohost-sdk
+
+This program will install the MLNX_OFED_LINUX package on your machine.
+Note that all other Mellanox, OEM, OFED, RDMA or Distribution IB packages will be removed.
+Those packages are removed due to conflicts with MLNX_OFED_LINUX, do not reinstall them.
+
+Do you want to continue?[y/N]:y
+
+Checking SW Requirements...
+Removing old packages...
+Installing new packages
+Installing ofed-scripts-5.4...
+Installing mlnx-tools-5.2.0...
+Installing mlnx-ofed-kernel-utils-5.4...
+Installing mlnx-ofed-kernel-modules-5.4...
+Installing iser-modules-5.4...
+Installing isert-modules-5.4...
+Installing srp-modules-5.4...
+Installing rdma-core-54mlnx1...
+Installing libibverbs1-54mlnx1...
+Installing ibverbs-utils-54mlnx1...
+Installing ibverbs-providers-54mlnx1...
+Installing libibverbs-dev-54mlnx1...
+Installing libibverbs1-dbg-54mlnx1...
+Installing libibumad3-54mlnx1...
+Installing libibumad-dev-54mlnx1...
+Installing ibacm-54mlnx1...
+Installing librdmacm1-54mlnx1...
+Installing rdmacm-utils-54mlnx1...
+Installing librdmacm-dev-54mlnx1...
+Installing mstflint-4.16.0...
+Installing ibdump-6.0.0...
+Installing libibmad5-54mlnx1...
+Installing libibmad-dev-54mlnx1...
+Installing libopensm-5.9.0.MLNX20210617.c9f2ade...
+Installing opensm-5.9.0.MLNX20210617.c9f2ade...
+Installing opensm-doc-5.9.0.MLNX20210617.c9f2ade...
+Installing libopensm-devel-5.9.0.MLNX20210617.c9f2ade...
+Installing libibnetdisc5-54mlnx1...
+Installing infiniband-diags-54mlnx1...
+Installing mft-4.17.0...
+Installing kernel-mft-modules-4.17.0...
+Installing perftest-4.5...
+Installing ibutils2-2.1.1...
+Installing ar-mgr-1.0...
+Installing dump-pr-1.0...
+Installing ibsim-0.10...
+Installing ibsim-doc-0.10...
+Installing ucx-1.11.0...
+Installing sharp-2.5.0.MLNX20210613.83fe753...
+Installing hcoll-4.7.3199...
+Installing openmpi-4.1.2a1...
+Installing mpitests-3.2.20...
+Installing knem-modules-1.1.4.90mlnx1...
+Installing libdapl2-2.1.10.1.mlnx...
+Installing dapl2-utils-2.1.10.1.mlnx...
+Installing libdapl-dev-2.1.10.1.mlnx...
+Installing dpcp-1.1.12...
+Installing srptools-54mlnx1...
+Installing mlnx-ethtool-5.10...
+Installing mlnx-iproute2-5.11.0...
+Installing rshim-2.0.6...
+Installing neohost-backend-1.5.0...
+Installing neohost-sdk-1.5.0...
+Selecting previously unselected package mlnx-fw-updater.
+(Reading database ... 240265 files and directories currently installed.)
+Preparing to unpack .../mlnx-fw-updater_5.4-1.0.3.0_amd64.deb ...
+Unpacking mlnx-fw-updater (5.4-1.0.3.0) ...
+Setting up mlnx-fw-updater (5.4-1.0.3.0) ...
+
+Added &#x27;RUN_FW_UPDATER_ONBOOT=no to /etc/infiniband/openib.conf
+
+Initializing...
+Attempting to perform Firmware update...
+Querying Mellanox devices firmware ...
+
+Device #1:
+----------
+
+  Device Type:      ConnectX4LX
+  Part Number:      MCX4121A-ACA_Ax
+  Description:      ConnectX-4 Lx EN network interface card; 25GbE dual-port SFP28; PCIe3.0 x8; ROHS R6
+  PSID:             MT_2420110034
+  PCI Device Name:  01:00.0
+  Base MAC:         b8599fc773ca
+  Versions:         Current        Available     
+     FW             14.28.2006     14.31.1014    
+     PXE            3.6.0102       3.6.0403      
+     UEFI           14.21.0017     14.24.0013    
+
+  Status:           Update required
+
+---------
+Found 1 device(s) requiring firmware update...
+
+Device #1: Updating FW ...     
+Querying Mellanox devices firmware ...
+
+Device #1:
+----------
+
+  Device Type:      ConnectX4LX
+  Part Number:      MCX4121A-ACA_Ax
+  Description:      ConnectX-4 Lx EN network interface card; 25GbE dual-port SFP28; PCIe3.0 x8; ROHS R6
+  PSID:             MT_2420110034
+  PCI Device Name:  09:00.0
+  Base MAC:         b8599f3b57b6
+  Versions:         Current        Available     
+     FW             14.31.1014     14.31.1014    
+     PXE            3.6.0403       3.6.0403      
+     UEFI           14.24.0013     14.24.0013    
+
+  Status:           Up to date
+
+
+Log File: /tmp/xsQgq1zxi4
+-W- DMA burning is not supported due to BME is unset (Bus Master Enable).
+FSMST_INITIALIZE -   OK          
+Writing Boot image component -   OK                                                                                                                                Done
+
+Restart needed for updates to take effect.
+Log File: /tmp/7vKME08X_v
+Real log file: /tmp/MLNX_OFED_LINUX.6015.logs/fw_update.log
+Device (01:00.0):
+	01:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+	Link Width: x8
+	PCI Link Speed: 8GT/s
+
+Device (01:00.1):
+	01:00.1 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+	Link Width: x8
+	PCI Link Speed: 8GT/s
+
+Device (09:00.0):
+	09:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+	Link Width: x4 ( WARNING - device supports x8 )
+	PCI Link Speed: 5GT/s
+
+Device (09:00.1):
+	09:00.1 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+	Link Width: x4 ( WARNING - device supports x8 )
+	PCI Link Speed: 5GT/s
+
+Installation passed successfully
+To load the new driver, run:
+/etc/init.d/openibd restart
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# /etc/init.d/openibd restart
+Unloading HCA driver:                                      [  OK  ]
+Loading HCA driver and Access Layer:                       [  OK  ]
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext#</code></pre></div>
+
+<h3 id="0x03-结果验证"><a href="#0x03-结果验证" class="headerlink" title="0x03 结果验证"></a>0x03 结果验证</h3><div class="hljs code-wrapper"><pre><code class="hljs shell">root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# /etc/init.d/openibd status
+
+  HCA driver loaded
+
+Configured Mellanox EN devices:
+enp9s0f0
+enp9s0f1
+ens11f0
+ens11f1
+
+Currently active Mellanox devices:
+
+
+
+
+
+The following OFED modules are loaded:
+
+  rdma_ucm
+  rdma_cm
+  ib_ipoib
+  mlx5_core
+  mlx5_ib
+  ib_uverbs
+  ib_umad
+  ib_cm
+  ib_core
+  mlxfw
+
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# lspci | grep -i ethernet
+01:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+01:00.1 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+02:00.0 Ethernet controller: Cavium, Inc. Device 9702 (rev 03)
+02:00.1 Ethernet controller: Cavium, Inc. Device 9702 (rev 03)
+03:00.0 Ethernet controller: Intel Corporation Ethernet Controller X710 for 10GbE SFP+ (rev 02)
+03:00.1 Ethernet controller: Intel Corporation Ethernet Controller X710 for 10GbE SFP+ (rev 02)
+03:00.2 Ethernet controller: Intel Corporation Ethernet Controller X710 for 10GbE SFP+ (rev 02)
+03:00.3 Ethernet controller: Intel Corporation Ethernet Controller X710 for 10GbE SFP+ (rev 02)
+07:00.0 Ethernet controller: Intel Corporation I210 Gigabit Network Connection (rev 03)
+08:00.0 Ethernet controller: Intel Corporation I210 Gigabit Network Connection (rev 03)
+09:00.0 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+09:00.1 Ethernet controller: Mellanox Technologies MT27710 Family [ConnectX-4 Lx]
+root@Super-Server:/tmp/MLNX_OFED_LINUX-5.4-1.0.3.0-ubuntu16.04-x86_64-ext# cd
+root@Super-Server:~# ethtool enp9s0f0
+Settings for enp9s0f0:
+	Supported ports: [ FIBRE ]
+	Supported link modes:   1000baseKX/Full 
+	                        10000baseKR/Full 
+	                        25000baseCR/Full 
+	                        25000baseKR/Full 
+	                        25000baseSR/Full 
+	Supported pause frame use: Symmetric
+	Supports auto-negotiation: Yes
+	Supported FEC modes: None BaseR RS
+	Advertised link modes:  1000baseKX/Full 
+	                        10000baseKR/Full 
+	                        25000baseCR/Full 
+	                        25000baseKR/Full 
+	                        25000baseSR/Full 
+	Advertised pause frame use: Symmetric
+	Advertised auto-negotiation: Yes
+	Advertised FEC modes: None
+	Speed: 25000Mb/s
+	Duplex: Full
+	Port: FIBRE
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	Supports Wake-on: d
+	Wake-on: d
+	Current message level: 0x00000004 (4)
+			       link
+	Link detected: yes
+root@Super-Server:~# ethtool enp9s0f1
+Settings for enp9s0f1:
+	Supported ports: [ FIBRE ]
+	Supported link modes:   1000baseKX/Full 
+	                        10000baseKR/Full 
+	                        25000baseCR/Full 
+	                        25000baseKR/Full 
+	                        25000baseSR/Full 
+	Supported pause frame use: Symmetric
+	Supports auto-negotiation: Yes
+	Supported FEC modes: None BaseR RS
+	Advertised link modes:  1000baseKX/Full 
+	                        10000baseKR/Full 
+	                        25000baseCR/Full 
+	                        25000baseKR/Full 
+	                        25000baseSR/Full 
+	Advertised pause frame use: Symmetric
+	Advertised auto-negotiation: Yes
+	Advertised FEC modes: RS
+	Link partner advertised link modes:  Not reported
+	Link partner advertised pause frame use: No
+	Link partner advertised auto-negotiation: Yes
+	Link partner advertised FEC modes: Not reported
+	Speed: 25000Mb/s
+	Duplex: Full
+	Port: FIBRE
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	Supports Wake-on: d
+	Wake-on: d
+	Current message level: 0x00000004 (4)
+			       link
+	Link detected: yes
+root@Super-Server:~#</code></pre></div>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/article/2118283419.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">自定义 Hexo 首页文章描述的显示内容</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/article/2279620328.html">
+                        <span class="hidden-mobile">使用 rsync 实现生产数据的增量备份</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
