@@ -6,7 +6,7 @@
   <link href="https://srezone.open-space.cc/atom.xml" rel="self"/>
   
   <link href="https://srezone.open-space.cc/"/>
-  <updated>2021-12-08T10:16:19.000Z</updated>
+  <updated>2023-01-11T09:37:11.333Z</updated>
   <id>https://srezone.open-space.cc/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NAS上的硬盘分配</title>
+    <link href="https://srezone.open-space.cc/article/3086994030.html"/>
+    <id>https://srezone.open-space.cc/article/3086994030.html</id>
+    <published>2023-01-10T02:19:56.569Z</published>
+    <updated>2023-01-11T09:37:11.333Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="现有硬盘信息"><a href="#现有硬盘信息" class="headerlink" title="现有硬盘信息"></a>现有硬盘信息</h3><ul><li><strong>希捷酷鱼 A</strong></li></ul><p><strong>型号：</strong>ST2000DM008-2FR1</p><p><strong>产品定位：</strong>桌面级</p><p><strong>存储容量：</strong>2T</p><p><strong>存储技术：</strong>叠瓦式磁记录</p><p><strong>使用时长：</strong>5630h</p><ul><li><strong>希捷酷鱼 B</strong></li></ul><p><strong>型号：</strong>ST2000DM008-2FR1</p><p><strong>产品定位：</strong>桌面级</p><p><strong>存储容量：</strong>2T</p><p><strong>存储技术：</strong>叠瓦式磁记录</p><p><strong>使用时长：</strong>9627h</p><ul><li><strong>西部数据 HC320</strong></li></ul><p><strong>型号：</strong>HGST HUS728T8TAL</p><p><strong>产品定位：</strong>企业级</p><p><strong>存储容量：</strong>8T</p><p><strong>存储技术：</strong>垂直磁记录</p><p><strong>使用时长：</strong>139h</p><h3 id="存储方案对比"><a href="#存储方案对比" class="headerlink" title="存储方案对比"></a>存储方案对比</h3><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>两块希捷酷鱼2T的叠瓦盘做Raid1，试图用Raid1来抵消叠瓦盘和桌面级硬盘的不可靠，但是存储容量损失较大。</p><p>西部数据HC320 8T本就是企业级硬盘，因此直接使用单盘模式。</p><p>总存储容量10T。</p><h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>为了充分利用所有硬盘，两块希捷酷鱼2T、西部数据HC320 8T都使用单盘模式。</p><p>数据安全性方面，则使用容器运行同步工具，确保重要的资料以3副本的模式分别存储在三块硬盘中。</p><p>总存储容量12T，想来重要的资料也不会超过1/2T，且3副本模式在目前的硬件资源下是最安全的方案了。</p><h3 id="最终决定"><a href="#最终决定" class="headerlink" title="最终决定"></a>最终决定</h3><p>这么分析下来，当然选择方案二了，以单盘的形式使用这三块盘，让硬盘的利用率达到最高。由于自己评估下来，值得以3副本模式存储的重要资料也就不到1T，最多2T的样子，这样也能利用脚本实现重要数据高可靠了，想来安全性也要远高于两块桌面级别的叠瓦盘组Raid1。而且，使用CentOS容器来维持数据高可靠，可以做得非常灵活。</p>]]></content>
+    
+    
+    <summary type="html">基于现有的硬件资源：DX4600、HC320、两块希捷酷鱼，分析对比，找出一个最优的解决方案</summary>
+    
+    
+    
+    <category term="HomeLab" scheme="https://srezone.open-space.cc/categories/HomeLab/"/>
+    
+    
+    <category term="NAS" scheme="https://srezone.open-space.cc/tags/NAS/"/>
+    
+  </entry>
   
   <entry>
     <title>部署有3个节点的 K8S 集群</title>
