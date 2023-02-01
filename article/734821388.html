@@ -16,26 +16,24 @@
   <meta name="author" content="Richard Lee">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Facebook 的两级 Clos 网络架构的高清大图">
+    <meta name="description" content="使用rsync脚本，在三块硬盘之间同步重要数据，以保证数据安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Facebook F4 两级 Clos 网络架构-纯图">
-<meta property="og:url" content="https://srezone.open-space.cc/article/1394958544.html">
+<meta property="og:title" content="NAS_0x03_使用rsync维持重要数据的多个副本（一）">
+<meta property="og:url" content="https://srezone.open-space.cc/article/734821388.html">
 <meta property="og:site_name" content="SREZONE">
-<meta property="og:description" content="Facebook 的两级 Clos 网络架构的高清大图">
+<meta property="og:description" content="使用rsync脚本，在三块硬盘之间同步重要数据，以保证数据安全">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img.imgdb.cn/item/6020edd73ffa7d37b38f4ed5.jpg">
-<meta property="article:published_time" content="2021-02-08T07:55:31.000Z">
-<meta property="article:modified_time" content="2021-11-09T10:10:16.000Z">
+<meta property="article:published_time" content="2021-11-09T10:11:07.000Z">
+<meta property="article:modified_time" content="2023-02-01T10:20:43.295Z">
 <meta property="article:author" content="Richard Lee">
-<meta property="article:tag" content="Clos">
+<meta property="article:tag" content="NAS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img.imgdb.cn/item/6020edd73ffa7d37b38f4ed5.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Facebook F4 两级 Clos 网络架构-纯图 - SREZONE</title>
+  <title>NAS_0x03_使用rsync维持重要数据的多个副本（一） - SREZONE</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -214,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Facebook F4 两级 Clos 网络架构-纯图"></span>
+            <span id="subtitle" data-typed-text="NAS_0x03_使用rsync维持重要数据的多个副本（一）"></span>
           
         </div>
 
@@ -225,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-02-08 15:55" pubdate>
-          2021年2月8日 下午
+        <time datetime="2021-11-09 18:11" pubdate>
+          2021年11月9日 晚上
         </time>
       </span>
     
@@ -238,7 +236,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          0 字
+          668 字
         
       </span>
     
@@ -250,7 +248,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -288,12 +286,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Facebook F4 两级 Clos 网络架构-纯图</h1>
+            <h1 style="display: none">NAS_0x03_使用rsync维持重要数据的多个副本（一）</h1>
             
             
               <div class="markdown-body">
                 
-                <p><img src="https://img.imgdb.cn/item/6020edd73ffa7d37b38f4ed5.jpg" srcset="/img/loading.gif" lazyload alt="Facebook F4"></p>
+                <p>为了最大程度地利用每一块硬盘，所以使用以下rsync脚本，在三块硬盘之间同步重要数据，以保证数据安全。</p>
+<div class="code-wrapper"><pre><code class="hljs bash">[root@21d5b39a1cec rsync]<span class="hljs-comment"># cat rsync-datacenter.sh </span>
+<span class="hljs-comment">#!/bin/bash</span>
+
+execute_id=`uuidgen`
+
+log_file=<span class="hljs-string">&quot;/mnt/TiPlus5A/Docker/CentOS7/rsync/log.d/`date &#x27;+%Y%m%d%H%M%S&#x27;`-execute.log&quot;</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script started time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;HC320A -&gt; BarraCudaA&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>
+rsync -av --delete /mnt/HC320A/DataCenter /mnt/BarraCudaA/ &gt;&gt; <span class="hljs-variable">$log_file</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;BarraCudaA -&gt; BarraCudaB&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>
+rsync -av --delete /mnt/BarraCudaA/DataCenter /mnt/BarraCudaB/ &gt;&gt; <span class="hljs-variable">$log_file</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script finished time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span>
+[root@21d5b39a1cec rsync]<span class="hljs-comment"># </span></code></pre></div>
+
 
                 
               </div>
@@ -312,7 +328,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BD%91%E7%BB%9C/" class="category-chain-item">网络</a>
+  <a href="/categories/HomeLab/" class="category-chain-item">HomeLab</a>
   
   
 
@@ -327,7 +343,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Clos/">#Clos</a>
+        <a href="/tags/NAS/">#NAS</a>
       
     </div>
   
@@ -339,8 +355,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Facebook F4 两级 Clos 网络架构-纯图</div>
-      <div>https://srezone.open-space.cc/article/1394958544.html</div>
+      <div>NAS_0x03_使用rsync维持重要数据的多个副本（一）</div>
+      <div>https://srezone.open-space.cc/article/734821388.html</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +368,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年2月8日</div>
+          <div>2021年11月9日</div>
         </div>
       
       
@@ -384,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/article/1517646518.html" title="在 Hexo 推送博客期间出现的问题与解决方案">
+                      <a href="/article/3745157708.html" title="NAS_0x02_缓存盘到货，国货之光？">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在 Hexo 推送博客期间出现的问题与解决方案</span>
+                        <span class="hidden-mobile">NAS_0x02_缓存盘到货，国货之光？</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -394,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/article/93640367.html" title="Hexo 快速入门">
-                        <span class="hidden-mobile">Hexo 快速入门</span>
+                      <a href="/article/1882097394.html" title="OpenStack 社区已正式发布第24个大版本-Xena">
+                        <span class="hidden-mobile">OpenStack 社区已正式发布第24个大版本-Xena</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
