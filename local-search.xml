@@ -29,6 +29,56 @@
   
   
   <entry>
+    <title>NAS_0x03_使用rsync维持重要数据的多个副本（一）</title>
+    <link href="/article/734821388.html"/>
+    <url>/article/734821388.html</url>
+    
+    <content type="html"><![CDATA[<p>为了最大程度地利用每一块硬盘，所以使用以下rsync脚本，在三块硬盘之间同步重要数据，以保证数据安全。</p><div class="code-wrapper"><pre><code class="hljs bash">[root@21d5b39a1cec rsync]<span class="hljs-comment"># cat rsync-datacenter.sh </span><span class="hljs-comment">#!/bin/bash</span>execute_id=`uuidgen`log_file=<span class="hljs-string">&quot;/mnt/TiPlus5A/Docker/CentOS7/rsync/log.d/`date &#x27;+%Y%m%d%H%M%S&#x27;`-execute.log&quot;</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script started time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;HC320A -&gt; BarraCudaA&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>rsync -av --delete /mnt/HC320A/DataCenter /mnt/BarraCudaA/ &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;BarraCudaA -&gt; BarraCudaB&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>rsync -av --delete /mnt/BarraCudaA/DataCenter /mnt/BarraCudaB/ &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script finished time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span>[root@21d5b39a1cec rsync]<span class="hljs-comment"># </span></code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>HomeLab</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>NAS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>NAS_0x02_缓存盘到货，国货之光？</title>
+    <link href="/article/3745157708.html"/>
+    <url>/article/3745157708.html</url>
+    
+    <content type="html"><![CDATA[<p>待补充内容，累了，今天不想写字了…</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>HomeLab</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>NAS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>NAS_0x01_硬盘分配</title>
     <link href="/article/3086994030.html"/>
     <url>/article/3086994030.html</url>
@@ -86,56 +136,6 @@
       
     </categories>
     
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>NAS_0x02_缓存盘到货，国货之光？</title>
-    <link href="/article/3745157708.html"/>
-    <url>/article/3745157708.html</url>
-    
-    <content type="html"><![CDATA[<p>待补充内容，累了，今天不想写字了…</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>HomeLab</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>NAS</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>NAS_0x03_使用rsync维持重要数据的多个副本（一）</title>
-    <link href="/article/734821388.html"/>
-    <url>/article/734821388.html</url>
-    
-    <content type="html"><![CDATA[<p>为了最大程度地利用每一块硬盘，所以使用以下rsync脚本，在三块硬盘之间同步重要数据，以保证数据安全。</p><div class="code-wrapper"><pre><code class="hljs bash">[root@21d5b39a1cec rsync]<span class="hljs-comment"># cat rsync-datacenter.sh </span><span class="hljs-comment">#!/bin/bash</span>execute_id=`uuidgen`log_file=<span class="hljs-string">&quot;/mnt/TiPlus5A/Docker/CentOS7/rsync/log.d/`date &#x27;+%Y%m%d%H%M%S&#x27;`-execute.log&quot;</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script started time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;HC320A -&gt; BarraCudaA&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>rsync -av --delete /mnt/HC320A/DataCenter /mnt/BarraCudaA/ &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;BarraCudaA -&gt; BarraCudaB&#x27;</span> &gt;&gt; <span class="hljs-variable">$log_file</span>rsync -av --delete /mnt/BarraCudaA/DataCenter /mnt/BarraCudaB/ &gt;&gt; <span class="hljs-variable">$log_file</span><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Rsync script finished time is :&#x27;</span> `<span class="hljs-built_in">date</span>` <span class="hljs-variable">$execute_id</span> &gt;&gt; <span class="hljs-variable">$log_file</span>[root@21d5b39a1cec rsync]<span class="hljs-comment"># </span></code></pre></div>]]></content>
-    
-    
-    <categories>
-      
-      <category>HomeLab</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>NAS</tag>
-      
-    </tags>
     
   </entry>
   
